@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="index.css">
+    <title>Todo | Project Vanilla</title>
+</head>
+<body>
+    <div id="form-container">
+        <form id="form" >
+            <div class="title">
+                <h1>Registration Form</h1>
+            </div>
+
+            <div class="names">
+                <label for="first_name">
+                    <p>First Name</p>
+                    <input required id="first_name" name="first_name" class="box" type="text">
+                </label>
+                <label for="Last_name">
+                    <p>Last Name</p>
+                    <input required id="Last_name" name="last_name" class="box" type="text">
+                </label>
+            </div>
+
+            <div class="birthday-gender">
+                <label for="date_of_birth">
+                    <p>Birthday</p>
+                    <input required id="date_of_birth" name="date_of_birth" class="box" type="date">
+                </label>
+                <label id="gender-box" for="gender">
+                    <p>Gender</p>
+                    <div id="label-genders">
+                        <label for="male"><input id="male" value=1 name="gender" type="radio"> Male</label>
+                        <label for="female"><input id="female" value=2 name="gender" type="radio"> Female</label>
+                        <label for="other"><input id="other" value=3 name="gender" type="radio"> Other</label>
+                    </div>
+                </label>
+            </div>
+
+            <div class="email-number">
+                <label for="email">
+                    <p>Email</p>
+                    <input required id="email" name="email" class="box" type="email">
+                </label>
+                <label for="phone">
+                    <p>Phone Number</p>
+                    <input required id="phone" name="phone" class="box" type="number">
+                </label>
+            </div>
+
+            <div class="username">
+                <label for="username">
+                    <p>Username</p>
+                    <input required id="username" name="username" class="box" type="text">
+                </label>
+                <label id="password-box" for="password-input">
+                    <p>Password</p>
+                    <input required id="password-input" name="password" class="box" type="password">
+                    <i id="show-icon" class="fa-solid fa-eye" style="cursor: pointer;"></i>
+                    <i id="hide-icon" class="fa-solid fa-eye-slash" style="cursor: pointer; display: none;"></i>
+                </label>
+            </div>
+
+            <div id="buttons" class="buttons">
+                <button type="submit" class="register-btn">
+                    Register
+                </button>
+                <p>Already have an account? <a href="./pages/login/index.html" id="login-link">Login</a></p>
+            </div>
+        </form>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+</html>

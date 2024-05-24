@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <title>Todo List</title>
+</head>
+<body onload="getData()" >
+
+
+<!-- toast notification -->
+<div id="toast">
+    <i class="fa-solid fa-check"></i>
+    <span>
+        Success
+    </span>
+</div>
+<div id="toast-error">
+    <i class="fa-solid fa-x"></i>
+    <span>
+        Failed 
+    </span>
+</div>
+
+<nav class="nav" >
+    <!-- <div class="bars">
+        <div id="bar1"></div>
+        <div id="bar2"></div>
+    </div>
+    <h2 id="nav-title" >Todo App</h2> -->
+    <button id="createTodo-btn" >+</button>
+    <form id="logout-button" >
+        <button type="submit" >Logout</button>
+    </form>
+</nav>
+<!-- Dialog box -->
+
+
+
+<!-- create todo  -->
+<dialog id="dialog-box" >
+<form id="todo-form" >
+    <span id="cross-todo" >
+        <i class="fa-solid fa-xmark"></i>
+    </span>
+    <label class="label-title" name="title" for="todo-title">Title:</label>
+    <input id="todo-title" required name="title"  type="text">
+    <label class="label-title" name="description" for="todo-desc">Description:</label>
+    <textarea  required cols="15" rows="5"  name="description" id="todo-desc"></textarea>
+    <button class="submit-btn" type="submit" >Create</button>
+</form>
+</dialog>
+
+
+<!-- edit todo form  -->
+<dialog id="dialog-box-patch" >
+    <form id="todo-form-patch" onsubmit="editData()">
+        <span id="cross-todo-patch" >
+            <i class="fa-solid fa-xmark"></i>
+        </span>
+        <label class="label-title-patch" name="title" for="todo-title">Title:</label>
+        <input id="todo-title-patch" required name="title"  type="text">
+        <label class="label-description-patch" name="description" for="todo-desc">Description:</label>
+        <textarea required cols="15" rows="5"  name="description" id="todo-desc-patch"></textarea>
+        <button class="submit-btn" type="submit">Save</button>
+    </form>
+    </dialog>
+    
+
+
+
+<section class="todo-container">
+
+<ul class="items" >
+<!-- list of Items  -->
+</ul>
+</section>
+
+
+<script src="./script.js" ></script>
+</body>
+</html>
