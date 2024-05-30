@@ -5,12 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <title>Todo List</title>
+    <script type="module"  src="./script.js" ></script>
 </head>
-<body onload="getData()" >
+<body>
 
 
 <!-- toast notification -->
@@ -32,11 +33,26 @@
         <div id="bar1"></div>
         <div id="bar2"></div>
     </div>
-    <h2 id="nav-title" >Todo App</h2> -->
-    <button id="createTodo-btn" >+</button>
-    <form id="logout-button" >
+     -->
+     <button id="createTodo-btn" >+</button>
+     <h2 id="nav-title" >Todo App</h2>
+    <!-- <form id="logout-button" >
         <button type="submit" >Logout</button>
-    </form>
+    </form> -->
+    <div id="Photo">
+        <img id="profile-img" src="" alt="">
+    </div>
+</nav>
+
+<nav id="nav-box">
+    <div class="user-icons ub-icon"><i class="fa-solid fa-bars-staggered"></i></div>
+   <div class="userInfo u-icon"><i class="fa-solid fa-user"></i>User</div>
+   <div class="userSettings u-icon"><i class="fa-solid fa-gear"></i><a target="_blank" href="/pages/settings/index.html">Settings</a></div>
+   <form class="userLogout">
+    <button class="u-icon" >
+        <i class="fa-solid fa-right-from-bracket"></i>Logout
+    </button>
+</form>
 </nav>
 <!-- Dialog box -->
 
@@ -59,7 +75,7 @@
 
 <!-- edit todo form  -->
 <dialog id="dialog-box-patch" >
-    <form id="todo-form-patch" onsubmit="editData()">
+    <form id="todo-form-patch">
         <span id="cross-todo-patch" >
             <i class="fa-solid fa-xmark"></i>
         </span>
@@ -67,6 +83,9 @@
         <input id="todo-title-patch" required name="title"  type="text">
         <label class="label-description-patch" name="description" for="todo-desc">Description:</label>
         <textarea required cols="15" rows="5"  name="description" id="todo-desc-patch"></textarea>
+        <div id="loader">
+            <img src="/assets/loader.gif" alt="loader">
+        </div>
         <button class="submit-btn" type="submit">Save</button>
     </form>
     </dialog>
@@ -82,6 +101,6 @@
 </section>
 
 
-<script src="./script.js" ></script>
+<script type="module" src="./color.js" ></script>
 </body>
 </html>

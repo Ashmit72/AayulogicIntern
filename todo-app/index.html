@@ -27,7 +27,12 @@
                     <input required id="Last_name" name="last_name" class="box" type="text">
                 </label>
             </div>
-
+               <!-- <div class="photo">
+                <label for="photo">
+                    <p>Profile Photo</p>
+                    <input  id="photo" type="file">
+                </label>
+               </div> -->
             <div class="birthday-gender">
                 <label for="date_of_birth">
                     <p>Birthday</p>
@@ -36,9 +41,9 @@
                 <label id="gender-box" for="gender">
                     <p>Gender</p>
                     <div id="label-genders">
-                        <label for="male"><input id="male" value=1 name="gender" type="radio"> Male</label>
-                        <label for="female"><input id="female" value=2 name="gender" type="radio"> Female</label>
-                        <label for="other"><input id="other" value=3 name="gender" type="radio"> Other</label>
+                        <label for="male"><input id="male" value="Male" name="gender" type="radio"> Male</label>
+                        <label for="female"><input id="female" value="Female" name="gender" type="radio"> Female</label>
+                        <label for="other"><input id="other" value="Other" name="gender" type="radio"> Other</label>
                     </div>
                 </label>
             </div>
@@ -64,6 +69,15 @@
                     <input required id="password-input" name="password" class="box" type="password">
                     <i id="show-icon" class="fa-solid fa-eye" style="cursor: pointer;"></i>
                     <i id="hide-icon" class="fa-solid fa-eye-slash" style="cursor: pointer; display: none;"></i>
+                </label>
+            </div>
+
+            <div class="confirm-password" style="display: flex;align-items: center;justify-content: center;" >
+                <label for="confirm-password">
+                    <p>Confirm Password</p>
+                    <input required id="confirm-password" name="password2" class="box" type="password">
+                    <i id="confirm-show-icon" class="fa-solid fa-eye" style="cursor: pointer;"></i>
+                    <i id="confirm-hide-icon" class="fa-solid fa-eye-slash" style="cursor: pointer; display: none;"></i>
                 </label>
             </div>
 

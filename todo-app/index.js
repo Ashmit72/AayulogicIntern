@@ -19,17 +19,18 @@ async function postData(data){
         const response=await fetch(`http://192.168.1.158:8000/register`,{
             method:'POST',
             headers:{
-                "Content-Type":"application/json"
+                // "Content-Type":"application/json"
             },
-            body:JSON.stringify(data),
+            body:data,
 
         })
         if (response.ok) {
+            console.log(response);
             console.log("posted");
-            window.location.replace('http://127.0.0.1:5500/pages/todo/index.html')
+            window.location.replace('http://127.0.0.1:5501/pages/login/index.html')
         }
-        else{
-            console.log("Failed to post!");
+        else if(response.status===400){
+            console.log("Passwords donot Match!");
         }
     } catch (error) {
         console.log(error.message);
@@ -42,10 +43,21 @@ form.addEventListener('submit',async ()=>{
     await handleSubmit(event)
 })
 
+// const photo=document.querySelector("#photo")
+//     const selectedPhoto=photo.files
+//     console.log(selectedPhoto);
+
+
 async function handleSubmit(event) {
     event.preventDefault();
-    const data=new FormData(event.target)
-    const dataObject = Object.fromEntries(data.entries());
-    console.log(dataObject);
-    await postData(dataObject);
+    console.log(event.target,"event")
+    const form=new FormData(event.target)
+    // const photo=document.querySelector("#photo")
+    // const selectedPhoto=photo.files[0]
+    // console.log(selectedPhoto)
+    // form.append("profile_picture",selectedPhoto)
+    console.log(form);
+    // const dataObject = Object.fromEntries(data.entries());
+    // console.log(dataObject);
+    await postData(form);
 }

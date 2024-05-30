@@ -1,0 +1,233 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.hangman-container {
+  max-width: 98%;
+  width: 100%;
+  background-color: #ffffff;
+  margin: 0 auto;
+  height: 100%;
+  display: grid;
+  grid-template-areas:
+    "word word word man man"
+    "word word word man man"
+    "keyboard keyboard keyboard keyboard keyboard"
+    "keyboard keyboard keyboard keyboard keyboard";
+  grid-gap: 10px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.hangman-container .wordBox {
+  grid-area: word;
+  /* background-color: aquamarine; */
+  background-color: red;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2rem;
+  align-items: center;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.hangman-container .wordBox #wordText{
+  font-size: 64px;
+}
+
+.hangman-container .manBox {
+  grid-area: man;
+  background-color: blanchedalmond;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 40px;
+  padding: 20px;
+  border-radius: 10px;
+  position: relative;
+}
+.hangman-container .manBox #bar{
+  border-left: 2px solid black;
+  border-top: 2px solid black;
+  width: 300px;
+  height: 500px;
+  position: relative;
+}
+.hangman-container .manBox #rope{
+position: absolute;
+border: 2px solid black;
+height: 130px;
+left: 50%;
+width: 1px;
+}
+.hangman-container .manBox #man{
+  /* border: 2px solid black; */
+  width: 100px;
+  position: absolute;
+  left: 35%;
+  top: 8rem;
+}
+.hangman-container .manBox #man .head{
+  border-radius: 100%;
+  border: 2px solid black;
+  height: 100px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: black;
+  display: none;
+}
+.hangman-container .manBox #man .head #eye{
+  height: 10px;
+  margin-top: 0.5rem;
+  width:100%;
+  /* border-radius: 100%; */
+  /* background-color: blue; */
+  display: flex;
+  /* flex-direction: column; */
+  align-items: center;
+  justify-content: center;
+  padding:1rem;
+}
+.hangman-container .manBox #man .head #eye span{
+  /* background-color: blue; */
+  display: flex;
+  position: relative;
+  top: 1rem;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.hangman-container .manBox #man .head #nose{
+  /* background-color: black; */
+  height: 40px;
+  transform: scale(0.7);
+  position: relative;
+  bottom: 0.5rem;
+}
+.hangman-container .manBox #man .head #lips{
+  /* background-color: red; */
+  height: 40px;
+  position: relative;
+  bottom: 1.5rem;
+  color: #ffffff;
+}
+.hangman-container .manBox #man .hands{
+  background-color: black;
+  width: 150px;
+  height: 8px;
+  border-radius: 8px;
+  position: relative;
+  right: 1.3rem;
+  display: none;
+  /* background-color: magenta; */
+  color: #fff;
+  
+}
+.hangman-container .manBox #man .body{
+  border: 2px solid black;
+  height: 120px;
+  width: 100px;
+  position: relative;
+  left:3px;
+  border-radius: 50%;
+  background-color: black;
+  display: none;
+}
+.hangman-container .manBox #man .legs{
+  /* background-color: magenta; */
+  width: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  transform: translateY(-20px);
+
+}
+.hangman-container .manBox #man .legs #right{
+  height: 100px;
+  width: 10px;
+  border: 2px solid black;
+  background-color: black;
+  border-radius: 40%;
+  transform: rotate(0.1turn);
+  display: none;
+  
+}
+.hangman-container .manBox #man .legs #left{
+  z-index: -1;
+  height: 100px;
+  border: 2px solid black;
+  transform: rotate(-0.1turn);
+  width: 10px;
+  background-color: black;
+  border-radius: 40%;
+  display: none;
+}
+
+.hangman-container .keyboard {
+  grid-area: keyboard;
+  background-color: aquamarine;
+  border-radius: 10px;
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-columns: repeat(9,1fr);
+  gap:1rem;
+
+}
+.hangman-container .keyboard button{
+  border: none;
+  font-weight: bold;
+  font-size: large;
+  cursor: pointer;
+}
+.hangman-container .keyboard #message{
+  width: 90vw;
+  /* background-color: aliceblue; */
+  display: flex;
+  color: rgb(160, 50, 100);
+  align-items: center;
+  justify-content: center;
+  display: none;
+  padding: 20px;
+  font-size: 48px;
+}
+.hangman-container .keyboard #message form{
+  width: 200px;
+  height: 40px;
+  background-color: #a03264;
+  font-size: 18px;
+  color: aquamarine;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bolder;
+  cursor: pointer;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  transition: 0.555s ease-in-out;
+}
+.hangman-container .keyboard #message form #restart-form{
+  background-color: transparent;
+  border: none;
+  color: aquamarine;
+}
+.hangman-container .keyboard #message form:hover{
+  transform: scale(1.05);
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+}
+

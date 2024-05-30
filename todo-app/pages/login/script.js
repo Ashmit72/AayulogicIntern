@@ -30,7 +30,7 @@ async function postLoginData(data){
         const {access,refresh}=token
         localStorage.setItem("access-token",access)
         localStorage.setItem("refresh-token",access)
-        window.location.replace('http://127.0.0.1:5500/pages/todo/index.html')
+        window.location.replace('http://127.0.0.1:5501/pages/todo/index.html')
     }
     else{
         const data=await response.json()

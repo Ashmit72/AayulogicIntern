@@ -6,6 +6,7 @@
     scroll-behavior: smooth;
 }
 
+
 body{
     background-color: #e3e9ff;
 }
@@ -102,6 +103,25 @@ body{
     border-radius: 8px;
     animation:navLoad 1s alternate;
 }
+#nav-box{
+    background-color:#f2f2f2;
+    max-width: 10%;
+    width: 100%;
+    position: absolute;
+    right: 10rem;
+    top: 5rem;
+    height: 250px;
+    z-index: 998;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    display: none;
+}
+#loader{
+    display: none;
+}
 .bars{
     height: 50px;
     width: 100px;
@@ -114,6 +134,34 @@ body{
     gap: 0.45rem;
     cursor: pointer;
     /* background-color: #8d97ba; */
+}
+.u-icon{
+    /* background-color: magenta; */
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    /* border-bottom: 1px solid #00766c; */
+}
+.u-icon a{
+    text-decoration: none;
+    color: black;
+}
+.ub-icon{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    cursor: pointer;
+    /* background-color: #00761c; */
+    padding: 1rem;
+}
+.u-icon:hover{
+    background-color: #D9D9D9;
 }
 #bar1{
     width: 50px;
@@ -224,7 +272,7 @@ body{
     border: 1px solid #dddddd;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     transition: all 150ms ease-in-out;
-    animation:cardLoad 1s alternate;
+    /* animation:cardLoad 1s alternate; */
 }
 .item:hover{
     transform: scale(1.09);
@@ -297,8 +345,29 @@ body{
     justify-content: center;
     border-radius: 8px;
 }
-
-
+#Photo{
+    /* border: 1px solid black; */
+    border-radius: 100%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: blue;
+    color: #fff;
+    font-weight: bolder;
+    cursor: pointer;
+    font-size: large;
+}
+#profile-img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 #cross-todo{
     position: absolute;
     top: 1rem;
