@@ -53,133 +53,71 @@ body {
 .hangman-container .manBox {
   grid-area: man;
   background-color: blanchedalmond;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* justify-content: center; */
+  /* align-items: center; */
   font-size: 40px;
   padding: 20px;
   border-radius: 10px;
   position: relative;
 }
-.hangman-container .manBox #bar{
-  border-left: 2px solid black;
-  border-top: 2px solid black;
-  width: 300px;
-  height: 500px;
-  position: relative;
-}
-.hangman-container .manBox #rope{
-position: absolute;
-border: 2px solid black;
-height: 130px;
-left: 50%;
-width: 1px;
-}
-.hangman-container .manBox #man{
-  /* border: 2px solid black; */
-  width: 100px;
-  position: absolute;
-  left: 35%;
-  top: 8rem;
-}
-.hangman-container .manBox #man .head{
-  border-radius: 100%;
-  border: 2px solid black;
-  height: 100px;
-  position: relative;
+.hangman-container .manBox .vertical-bar{
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: black;
+}
+.hangman-container .manBox .horizantal-bar{
+position: absolute;
+left: 10rem;
+/* top: 2rem; */
+}
+.hangman-container .manBox .rope{
+  position: absolute;
+  top: 4rem;
+  left: 10.4rem;
+}
+.hangman-container .manBox .head{
+position: absolute;
+top: 0;
+left: 9.8rem;
+top: 7rem;
+display: none;
+}
+.hangman-container .manBox .left-hand{
+  position: absolute;
+  /* top: 0; */
+  left: 9rem;
+  top: 9rem;
   display: none;
 }
-.hangman-container .manBox #man .head #eye{
-  height: 10px;
-  margin-top: 0.5rem;
-  width:100%;
-  /* border-radius: 100%; */
-  /* background-color: blue; */
-  display: flex;
-  /* flex-direction: column; */
-  align-items: center;
-  justify-content: center;
-  padding:1rem;
-}
-.hangman-container .manBox #man .head #eye span{
-  /* background-color: blue; */
-  display: flex;
-  position: relative;
-  top: 1rem;
-  align-items: flex-start;
-  justify-content: flex-start;
-}
-.hangman-container .manBox #man .head #nose{
-  /* background-color: black; */
-  height: 40px;
-  transform: scale(0.7);
-  position: relative;
-  bottom: 0.5rem;
-}
-.hangman-container .manBox #man .head #lips{
-  /* background-color: red; */
-  height: 40px;
-  position: relative;
-  bottom: 1.5rem;
-  color: #ffffff;
-}
-.hangman-container .manBox #man .hands{
-  background-color: black;
-  width: 150px;
-  height: 8px;
-  border-radius: 8px;
-  position: relative;
-  right: 1.3rem;
-  display: none;
-  /* background-color: magenta; */
-  color: #fff;
-  
-}
-.hangman-container .manBox #man .body{
-  border: 2px solid black;
-  height: 120px;
-  width: 100px;
-  position: relative;
-  left:3px;
-  border-radius: 50%;
-  background-color: black;
+.hangman-container .manBox .right-hand{
+  position: absolute;
+  left: 12rem;
+  top: 9rem;
   display: none;
 }
-.hangman-container .manBox #man .legs{
-  /* background-color: magenta; */
-  width: 100px;
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  transform: translateY(-20px);
-
-}
-.hangman-container .manBox #man .legs #right{
-  height: 100px;
-  width: 10px;
-  border: 2px solid black;
-  background-color: black;
-  border-radius: 40%;
-  transform: rotate(0.1turn);
-  display: none;
-  
-}
-.hangman-container .manBox #man .legs #left{
-  z-index: -1;
-  height: 100px;
-  border: 2px solid black;
-  transform: rotate(-0.1turn);
-  width: 10px;
-  background-color: black;
-  border-radius: 40%;
+.hangman-container .manBox .body{
+  position: absolute;
+  top:10rem;
+  left: 10.5rem;
   display: none;
 }
-
+.hangman-container .manBox .left-leg{
+position: absolute;
+top: 0;
+top:13rem;
+left: 10rem;
+display: none;
+}
+.hangman-container .manBox .right-leg{
+  position: absolute;
+top: 0;
+top:13rem;
+left: 11rem;
+display: none;
+}
 .hangman-container .keyboard {
   grid-area: keyboard;
   background-color: aquamarine;

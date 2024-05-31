@@ -30,7 +30,10 @@ buttons.forEach((button) => {
       }
       wordDisplay.innerText = currentWordDisplay.join('');
       if (wordDisplay.innerText === wordValue) {
-        console.log("Congratulations! You've guessed the word!");
+        buttons.forEach(button=>button.style.display="none")
+        const message=document.querySelector("#message")
+        message.style.display="block"
+        message.innerText="Congratulations You have Guessed The Word!"
       }
     } else {
       hangStatus=false
@@ -53,21 +56,24 @@ buttons.forEach((button) => {
         break
     case 3:
         console.log("left hand!");
-        const hands=document.querySelector(".hands")
-        hands.style.display="block"
+        const handsleft=document.querySelector(".left-hand")
+        handsleft.style.display="block"
         break
     case 4:
         console.log("Right leg!");
-        const right=document.querySelector("#right")
-        right.style.display="block"
+        const handsRight=document.querySelector(".right-hand")
+        handsRight.style.display="block"
         break
     case 5:
         console.log("left leg!");
-        const left=document.querySelector("#left")
-        left.style.display="block"
-         buttons.forEach(button=>button.style.display="none")
-         const message=document.querySelector("#message")
-         message.style.display="block"
+        const leftleg=document.querySelector(".left-leg")
+        leftleg.style.display="block"
+    case 6:
+      const rightleg=document.querySelector(".right-leg")
+      rightleg.style.display="block"
+      buttons.forEach(button=>button.style.display="none")
+      const message=document.querySelector("#message")
+      message.style.display="block"
     default:
     //   console.log("Invalid Choice");
     break
