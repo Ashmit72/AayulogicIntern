@@ -112,7 +112,7 @@ left: 10rem;
 display: none;
 }
 .hangman-container .manBox .right-leg{
-  position: absolute;
+position: absolute;
 top: 0;
 top:13rem;
 left: 11rem;
