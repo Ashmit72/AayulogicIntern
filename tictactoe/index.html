@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles.css">
+    <title>Tic Tac Toe</title>
+</head>
+<body>
+    <div class="container" style="position: relative;">
+        <!-- <canvas id="gameCanvas"></canvas> -->
+        <button class="box" id="box1"></button>
+        <button class="box" id="box2"></button>
+        <button class="box" id="box3"></button>
+        <button class="box" id="box4"></button>
+        <button class="box" id="box5"></button>
+        <button class="box" id="box6"></button>
+        <button class="box" id="box7"></button>
+        <button class="box" id="box8"></button>
+        <button class="box" id="box9"></button>
+
+        <!-- game complete borders -->
+        <div id="line-vertical" style="position: absolute;top:10px;left:150px;height: 88vh;width: 5px;background-color:red;display: none;">
+        </div>
+
+        
+        <div id="line-horizantal" style="position: absolute;
+        bottom: 100px;
+        left: 0px;
+        height: 5px;
+        width: 51vw;
+        display: none;
+        background-color: red;">
+        </div>
+        
+        
+        <div id="line-diagonal-1" style="position: absolute;
+        top: 10px;
+        left: 0px;
+        height: 5px;
+        width: 65vw;
+        background-color: red;
+        transform: rotate(40deg);
+        transform-origin: 0;
+        display: none;
+        ">
+        </div>
+
+
+        <div id="line-diagonal-2" style="position: absolute;
+        bottom: 10px;
+        left: 0px;
+        height: 5px;
+        width: 65vw;
+        background-color: red;
+        transform: rotate(-40deg);
+        transform-origin: 0;
+        display: none;
+        ">
+        </div>
+    </div>
+    <form action="">
+        <button id="restartBtn" >Restart</button>
+    </form>
+    <script src="/index.js"></script>    
+</body>
+</html>

@@ -1,0 +1,50 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    background-color: black;
+}
+.container{
+    background-color:black;
+    width: 100%;
+    max-width:50%;
+    margin: 0 auto;
+    height: 90vh;
+    display: grid;
+    grid-template:repeat(3,1fr)/repeat(3,1fr);
+    gap: 1rem;
+    padding: 1rem;
+   
+}
+.container .box{
+    background-color: antiquewhite;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: larger;
+    cursor: pointer;
+    border: none;
+    /* color: white; */
+    font-weight: bolder;
+}
+canvas {
+    position: absolute;
+    pointer-events: none;
+}
+
+#restartBtn{
+    width: 100px;
+    height: 40px;
+    position: absolute;
+    left: 50%;
+    cursor: pointer;
+    background-color: #faebd7;
+    border: 1px solid #faebd7;
+    color: brown;
+    font-weight: bolder;
+}
+#restartBtn:hover{
+    transform: scale(1.2);
+}
