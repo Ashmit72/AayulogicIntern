@@ -1,0 +1,43 @@
+
+#items-container{
+margin-top: 40px;   
+    a.product-item {
+        text-decoration: none;
+        color: unset;
+        overflow: hidden;
+        
+        div.card {
+            margin-bottom: 20px;
+            
+            .img-wrapper{
+                height: 200px;
+                overflow: hidden;
+            }
+            
+            img.card-img-top{
+                object-fit: cover;
+                transform: scale(1);
+                transition: all 250ms linear;
+            }
+            
+            .description {
+                // border: 1px solid red;
+                overflow: hidden !important;
+                display: -webkit-box !important;
+                -webkit-line-clamp: 2 !important;
+                -webkit-box-orient: vertical !important;
+            }
+        }
+        &:hover{
+            .card{
+                .img-wrapper{                
+                    img.card-img-top{
+                        transform: scale(1.1);
+                    }
+                }
+            }
+        }
+        
+    }
+    
+}
