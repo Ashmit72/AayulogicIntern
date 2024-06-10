@@ -29,8 +29,3 @@ new Splide("#splide-auto", {
     },
   },
 }).mount(window.splide.Extensions);
-
-
-// const smoothFlow=document.querySelector("#splide-auto-track").addEventListener('onload',()=>{
-//   smoothFlow.aria-busy==="true";
-// })

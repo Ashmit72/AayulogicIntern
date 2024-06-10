@@ -42,7 +42,7 @@
   <h1>Featured Products</h1>
   <div class="row">
     <div class="col-sm-12 col-md-6 col-lg-3 col-xl-4">
-      <a target="_blank" href="https://www.daraz.com.np/#hp-flash-sale" class="product-item">
+      <a target="_blank" href="/products.php" class="product-item">
         <div class="card">
           <div class="img-wrapper">
 
@@ -61,7 +61,7 @@
     </div>
 
     <div class="col-sm-12 col-md-6 col-lg-3 col-xl-4">
-      <a class="product-item" target="_blank" href="https://www.daraz.com.np/#hp-flash-sale">
+      <a href="/products.php" class="product-item" target="_blank" href="https://www.daraz.com.np/#hp-flash-sale">
         <div class="card ">
           <div class="img-wrapper">
 
@@ -81,7 +81,7 @@
 
 
     <div class="col-sm-12 col-md-6 col-lg-3 col-xl-4">
-      <a class="product-item" target="_blank" href="https://www.google.com">
+      <a href="/products.php" class="product-item" target="_blank" href="https://www.google.com">
         <div class="card">
           <div class="img-wrapper">
             <img src="https://cdn.pixabay.com/photo/2022/02/10/10/18/earphones-7005009_960_720.jpg" class="card-img-top"
@@ -100,7 +100,7 @@
 
 
     <div class="col-sm-12 col-md-6 col-lg-3 col-xl-4">
-      <a class="product-item" target="_blank" href="https://www.google.com/">
+      <a href="/products.php" class="product-item" target="_blank" href="https://www.google.com/">
         <div class="card ">
           <div class="img-wrapper">
 
@@ -120,7 +120,7 @@
 
 
     <div class="col-sm-12 col-md-6 col-lg-3 col-xl-4">
-      <a class="product-item" target="_blank" href="https://www.google.com/">
+      <a href="/products.php" class="product-item" target="_blank" href="https://www.google.com/">
         <div class="card ">
           <div class="img-wrapper">
 
@@ -139,7 +139,7 @@
     </div>
 
     <div class="col-sm-12 col-md-6 col-lg-3 col-xl-4">
-      <a class="product-item" target="_blank" href="https://www.google.com/">
+      <a href="/products.php" class="product-item" target="_blank" href="https://www.google.com/">
         <div class="card ">
           <div class="img-wrapper">
 
@@ -273,3 +273,4 @@
 
 <?php include "components/footer.php" ?>
 <?php require "layout/foot.php" ?>
+<script src="index.js" ></script>

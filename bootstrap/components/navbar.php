@@ -53,20 +53,20 @@
     <!-- Collapsible wrapper -->
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <!-- Left links -->
-      <ul class="navbar-nav me-3">
+      <!-- <ul class="navbar-nav me-3">
         <li class="nav-item">
           <a class="nav-link active d-flex align-items-center" aria-current="page" href="#"><i
               class="fas fa-bars pe-2"></i>Menu</a>
         </li>
-      </ul>
+      </ul> -->
       <!-- Left links -->
 
       <form class="d-flex align-items-center w-100 form-search">
         <div class="input-group">
-          <button class="btn btn-light dropdown-toggle shadow-0" type="button" data-mdb-toggle="dropdown"
+          <!-- <button class="btn btn-light dropdown-toggle shadow-0" type="button" data-mdb-toggle="dropdown"
             aria-expanded="false" style="padding-bottom: 0.4rem;">
             All
-          </button>
+          </button> -->
           <ul class="dropdown-menu dropdown-menu-dark fa-ul">
             <li>
               <a class="dropdown-item" href="#"><span class="fa-li pe-2"><i class="fas fa-search"></i></span>All</a>
