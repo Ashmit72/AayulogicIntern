@@ -1,0 +1,117 @@
+/* Custom styles */
+.hero {
+    padding: 100px 0;
+    background-image: url('https://cdn.pixabay.com/photo/2016/03/26/13/09/workspace-1280538_640.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+
+  }
+  .hero .overlay{
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    z-index:-1;
+    background: rgba(0,0,0,0.4);
+  }
+  .logo-wrapper{
+    height: 50px;
+    width: 200px;
+  }
+  .logo-wrapper .logo-img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+  .hero h1 {
+    font-size: 3rem;
+  }
+  
+  .hero p {
+    font-size: 1.2rem;
+  }
+
+  .hero .hero-img{
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  }
+  
+  .services {
+    padding: 80px 0;
+  }
+  
+  .services .service-item {
+    text-align: center;
+    margin-bottom: 30px;
+    width: 100%;
+    height: 100%;
+    transition: 250ms all ease-in-out;
+  }
+  .services .service-item:hover{
+    transform: scale(1.1);
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px !important;
+  }
+  
+  .services .service-item h3 {
+    font-size: 1.5rem;
+  }
+  .services .service-item .custom-wrapper{
+    height: 100px;
+    width: 100px;
+    transform: scale(0.8)
+  }
+  .services .service-item .custom-wrapper .custom-img{
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+  }
+  
+  .portfolio {
+    padding: 80px 0;
+  }
+  
+  .portfolio .portfolio-item {
+    margin-bottom: 30px;
+  }
+  .portfolio .portfolio-item .image-wrapper{
+    height: 100px;
+    width: 100%;
+    border-radius: 8px;
+    padding: 1rem;
+    
+  }
+  .portfolio .portfolio-item .image-wrapper .product-image{
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+  }
+  .contact {
+    padding: 80px 0;
+  }
+  
+  .contact form {
+    margin-bottom: 30px;
+  }
+  .contact form .form-control:focus{
+    border: none !important;
+  }
+  .contact .contact-info {
+    text-align: left;
+  }
+  
+  .contact .contact-info p {
+    font-size: 1.2rem;
+  }
+
+  @media screen and (max-width:767px) {
+    /* .portfolio-item{
+        margin-left: 10%;
+    } */
+  }
+  @media screen and (max-width:326px) {
+    /* .portfolio-item{
+        margin-left:5%;
+    } */
+  }
+  

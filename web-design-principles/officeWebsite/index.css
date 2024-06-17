@@ -1,0 +1,139 @@
+* {
+    font-family: "Roboto", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  .navbar-custom {
+    z-index: 1050;
+    background-color: #fff;
+    width: 100%;
+    left: 0;
+    top: 0;
+    border-bottom: 1px solid #e5e5e5;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  }
+  
+  .item {
+    cursor: pointer;
+    font-size: 18px;
+    color: #00050b;
+    transition: 250ms all ease-in-out;
+  }
+  
+  .item:hover {
+    color: #045cb6;
+    transform: scale(1.1);
+    font-weight: 500;
+  }
+  
+  #mid-section {
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+  }
+  
+  #mid-section #overlay{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    color: white;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .splide .card {
+    background-color: transparent;
+    border: none;
+  }
+  
+  .splide__arrows .splide__arrow {
+    display: none;
+  }
+  
+  .card .slider-description {
+    overflow: hidden !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+  }
+  
+  .card .img-wrapper {
+    height: 100px;
+    width: 100%;
+  }
+  
+  .card img-wrapper .img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+
+
+  #about-section{
+    min-height: 100vh;
+    width: 100%;
+    background-color: #f3f6f6;
+  }
+
+  .img-about{
+    transform: scale(0.8);
+  }
+  .card-container{
+    border: none;
+    height: 100%;
+    /* box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px; */
+  }
+  .card-content{
+    padding: 1rem 2rem !important;
+  }
+
+  #testimonial-section{
+    min-height: 100vh;
+    width: 100%;
+    /* background-color: #e3f2fd; */
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+    justify-content: start;
+  }
+  
+  @media screen and (max-width: 1000px) {
+    .navbar-custom .items {
+        display: none !important;
+      }
+      
+  
+    .item {
+      font-size: 15px;
+    }
+  }
+  @media screen and (min-width: 1000px) {
+    .fa-bars{
+        display: none !important;
+    }
+  }
+
+  @media screen  and (max-width:606px) {
+    .splide .card{
+        transform: scale(0.9);
+    }
+    .card .img-wrapper{
+        transform: scale(0.8);
+    }
+    #overlay{
+        padding-left: 1rem;
+    }
+  }
+
+  @media screen and (max-width:706px) {
+    .navbar-custom .logo img{
+        width: 200px;
+    }
+  }
