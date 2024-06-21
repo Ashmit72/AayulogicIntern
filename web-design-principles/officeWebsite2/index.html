@@ -7,13 +7,14 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@3.6.11/dist/css/splide.min.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <!-- Custom CSS -->
   <link rel="stylesheet" href="index.css">
 </head>
 <body>
   
   <!-- Navigation Bar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <nav id="nav-container" class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
       <a class="navbar-brand" href="#">
         <div class="logo-wrapper">
@@ -26,13 +27,13 @@
       <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
         <ul class="navbar-nav">
 
-          <li class="nav-item">
+          <li class="nav-item  ps-2 pe-2">
             <a class="nav-link" href="#services">Services</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item  ps-2 pe-2">
             <a class="nav-link" href="#portfolio">Portfolio</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item  ps-2 pe-2">
             <a class="nav-link" href="#contact">Contact</a>
           </li>
         </ul>
@@ -41,168 +42,306 @@
   </nav>
 
   <!-- Hero Section -->
-  <section class="hero">
-      <div class="overlay">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum aut itaque in similique repellendus praesentium debitis facere vero ullam cum?</div>
+  <!-- <section class="hero">
+      <div class="overlay"></div>
     <div class="container">
       <div class="row">
         <div class="col-lg-6">
           <h1 class="" style="color:white;">Create Awesome Things For Better Web </h1>
           <p style="color:white;" >We build innovative software solutions tailored to your needs.</p>
-          <a href="#contact" class="btn btn-primary">Get Started</a>
+          <a href="#contact" style="background-color: #045cb6; color: white;" id="started-btn" class="btn">Get Started</a>
+        </div>
+      </div>
+    </div>
+  </section> -->
+  <section style="height: 70vh;" class="hero-section ">
+    <div class="video-background">
+      <video autoplay muted loop id="hero-video">
+        <source src="/assets/video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+    
+    <div class="overlay"></div>
+    
+    <div class="hero-content">
+      <div class="container">
+        <div style="transform: translateY(100px);" class="row">
+          <div class="col-lg-12 text-start">
+            <h1 class="hero-heading text-info w-50">Create Awesome Things For Better Web</h1>
+            <p class="hero-subheading w-75">We're a team of system architects, data strategists, creatives and developers that take pride in crafting digital products</p>
+            <a href="#" class="btn btn-primary btn-lg">Get Started</a>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Services Section -->
 <!-- Services Section -->
 <section id="services" class="services">
-    <div class="container">
-      <h2 class="fs-1 text-center mb-4">Our Services</h2>
+  <div class="container">
+    <h2 class="position-relative fs-1 text-center mb-2">Our Services</h2>
+  </div>
+    <div class="container text-center">
+      <h1 class="fs-3 text-center text-secondary" >We offer premier services where excellence meets affordability.</h1>
+      <span id="line-1" ></span>
+      <br>
+      <br>
+      <br>
       <div class="row mb-4">
-        <div class="col-md-4 mb-4">
-          <div class="shadow-sm service-item">
+        <div class="col-md-12 col-lg-4 mb-5">
+          <div class="shadow-sm ps-4 pe-4 service-item">
+            <br>
             <div class="custom-wrapper">
               <img class="ps-4 pe-4 custom-img" src="/assets/svgs/business.svg" alt="">
             </div>
             <h3 class="text-start fw-bold ps-4 pe-4" >Business Applications</h3>
-            <p class="text-start ps-4 pe-4" >Awesome user experience and analytical overview of your business data.</p>
+            <!-- <div style="height:1px;background-color:#045cb6;opacity: 0.1;transform:translateX(20px);" class="mb-3 service-line"></div> -->
+            <p class="text-start text-secondary ps-4 pe-4" >Awesome user experience and analytical overview of your business data.</p>
+            <!-- <div style="height:1px;background-color:#045cb6;opacity: 0.1;transform:translateX(20px);" class="mb-3 service-line"></div> -->
+            <div class="button text-start pe-4 ps-4">
+              <a class="text-primary text-decoration-none fw-bolder" href="#">Learn More <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+            <br>
           </div>
         </div>
-        <div class="col-md-4 mb-4">
+        <div class="col-md-12 col-lg-4 mb-5">
           <div class="shadow-sm service-item">
+            <br>
             <div class="custom-wrapper">
               <img class="ps-4 pe-4 custom-img" src="/assets/svgs/enterprise.svg" alt="">
             </div>
             <h3 class="text-start fw-bold ps-4 pe-4" >Enterprise Solutions</h3>
-            <p class="text-start ps-4 pe-4" >Build customized CMS and dashboard applications tailored to fit your business </p>
+            <!-- <div style="height:1px;background-color:#045cb6;opacity: 0.1;transform:translateX(20px);" class="mb-3 service-line"></div> -->
+            <p class="text-start text-secondary ps-4 pe-4" >Build customized CMS and dashboard applications tailored to fit your business </p>
+            <!-- <div style="height:1px;background-color:#045cb6;opacity: 0.1;transform:translateX(20px);" class="mb-3 service-line"></div> -->
+            <div class="button text-start pe-4 ps-4">
+              <a class="text-primary text-decoration-none fw-bolder" href="#">Learn More <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+            <br>
           </div>
         </div>
-        <div class="col-md-4 mb-4">
+        <div class="col-md-12 col-lg-4 mb-5">
           <div class="shadow-sm service-item">
+            <br>
             <div class="custom-wrapper">
               <img class="ps-4 pe-4 custom-img" src="/assets/svgs/web.svg" alt="">
             </div>
             <h3 class="text-start fw-bold ps-4 pe-4" >Web Applications</h3>
-            <p class="text-start ps-4 pe-4" >Python, PHP, Node.js, on the back-end and Vue, Angular, jQuery and HTML5 </p>
+            <!-- <div style="height:1px;background-color:#045cb6;opacity: 0.1;transform:translateX(20px);" class="mb-3 service-line"></div> -->
+            <p class="text-start text-secondary ps-4 pe-4" >Python, PHP, Node.js, on the back-end and Vue, Angular, jQuery and HTML5 </p>
+            <!-- <div style="height:1px;background-color:#045cb6;opacity: 0.1;transform:translateX(20px);" class="mb-3 service-line"></div> -->
+            <div class="button text-start pe-4 ps-4">
+              <a class="text-primary text-decoration-none fw-bolder" href="#">Learn More <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+            <br>
           </div>
         </div>
-        <div class="col-md-4 mb-4">
+        <div class="col-md-12 col-lg-4 mb-5">
           <div class="shadow-sm service-item">
+            <br>
             <div class="custom-wrapper">
               <img class="ps-4 pe-4 custom-img" src="/assets/svgs/mobile.svg" alt="">
             </div>
             <h3 class="text-start fw-bold ps-4 pe-4" >Mobile Applications</h3>
-            <p class="text-start ps-4 pe-4" >Build customized native and hybrid apps for iOS, and Android.</p>
+            <!-- <div style="height:1px;background-color:#045cb6;opacity: 0.1;transform:translateX(20px);" class="mb-3 service-line"></div> -->
+            <p class="text-start text-secondary ps-4 pe-4" >Build customized native and hybrid apps for iOS, and Android.</p>
+            <!-- <div style="height:1px;background-color:#045cb6;opacity: 0.1;transform:translateX(20px);" class="mb-3 service-line"></div> -->
+            <div class="button text-start pe-4 ps-4">
+              <a class="text-primary text-decoration-none fw-bolder" href="#">Learn More <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+            <br>
           </div>
         </div>
-        <div class="col-md-4 mb-4">
+        <div class="col-md-12 col-lg-4 mb-5">
           <div class="shadow-sm service-item">
+            <br>
             <div class="custom-wrapper">
               <img class="ps-4 pe-4 custom-img" src="/assets/svgs/paint.svg" alt="">
             </div>
             <h3 class="text-start fw-bold ps-4 pe-4" >UI/UX</h3>
-            <p class="text-start ps-4 pe-4" >Creating seamless user experience and visually appealing user interface.</p>
+            <!-- <div style="height:1px;background-color:#045cb6;opacity: 0.1;transform:translateX(20px);" class="mb-3 service-line"></div> -->
+            <p class="text-start text-secondary ps-4 pe-4" >Creating seamless user experience and visually appealing user interface.</p>
+            <!-- <div style="height:1px;background-color:#045cb6;opacity: 0.1;transform:translateX(20px);" class="mb-3 service-line"></div> -->
+            <div class="button text-start pe-4 ps-4">
+              <a class="text-primary text-decoration-none fw-bolder" href="#">Learn More <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+            <br>
           </div>
         </div>
-        <div class="col-md-4 mb-4">
+        <div class="col-md-12 col-lg-4 mb-5">
           <div class="shadow-sm service-item">
+            <br>
             <div class="custom-wrapper">
               <img class="ps-4 pe-4 custom-img" src="/assets/svgs/cms.svg" alt="">
             </div>
             <h3 class="text-start fw-bold ps-4 pe-4" >CMS</h3>
-            <p class="text-start ps-4 pe-4" >Build customized CMS but not limited with WordPress, Drupal and Joomla </p>
+            <!-- <div style="height:1px;background-color:#045cb6;opacity: 0.1;transform:translateX(20px);" class="mb-3 service-line"></div> -->
+            <p class="text-start text-secondary ps-4 pe-4" >Build customized CMS but not limited with WordPress, Drupal and Joomla </p>
+            <!-- <div style="height:1px;background-color:#045cb6;opacity: 0.1;transform:translateX(20px);" class="mb-3 service-line"></div> -->
+            <div class="button text-start pe-4 ps-4">
+              <a class="text-primary text-decoration-none fw-bolder" href="#">Learn More <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+            <br>
           </div>
         </div>
-        <div class="col-md-4 mb-4">
+        <div class="col-md-12 col-lg-4 mb-5">
           <div class="shadow-sm service-item">
+            <br>
             <div class="custom-wrapper">
               <img class="ps-4 pe-4 custom-img" src="/assets/svgs/ecommerce.svg" alt="">
             </div>
             <h3 class="text-start fw-bold ps-4 pe-4" >E-Commerce</h3>
-            <p class="text-start ps-4 pe-4" >Magento, X-Cart, OpenCart, Shopify and custom e-commerce software </p>
+            <!-- <div style="height:1px;background-color:#045cb6;opacity: 0.1;transform:translateX(20px);" class="mb-3 service-line"></div> -->
+            <p class="text-start text-secondary ps-4 pe-4" >Magento, X-Cart, OpenCart, Shopify and custom e-commerce software </p>
+            <!-- <div style="height:1px;background-color:#045cb6;opacity: 0.1;transform:translateX(20px);" class="mb-3 service-line"></div> -->
+            <div class="button text-start pe-4 ps-4">
+              <a class="text-primary text-decoration-none fw-bolder" href="#">Learn More <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+            <br>
           </div>
         </div>
-        <div class="col-md-4 mb-4">
+        <div class="col-md-12 col-lg-4 mb-5">
           <div class="shadow-sm service-item">
+            <br>
             <div class="custom-wrapper">
               <img class="ps-4 pe-4 custom-img" src="/assets/svgs/management.svg" alt="">
             </div>
             <h3 class="text-start fw-bold ps-4 pe-4" >Management Systems</h3>
-            <p class="text-start ps-4 pe-4" >HRIS, Attendance, Payroll, CRM, Analytical data at your fingertips</p>
+            <!-- <div style="height:1px;background-color:#045cb6;opacity: 0.1;" class="mb-3 service-line"></div> -->
+            <p class="text-start text-secondary ps-4 pe-4" >HRIS, Attendance, Payroll, CRM, Analytical data at your fingertips</p>
+            <!-- <div style="height:1px;background-color:#045cb6;opacity: 0.1;" class="mb-3 service-line"></div> -->
+            <div class="button text-start pe-4 ps-4">
+              <a class="text-primary text-decoration-none fw-bolder" href="#">Learn More <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+            <br>
           </div>
         </div>
-        <div class="col-md-4 mb-4">
+        <div class="col-md-12 col-lg-4 mb-5">
           <div class="shadow-sm service-item">
+            <br>
             <div class="custom-wrapper">
               <img class="ps-4 pe-4 custom-img" src="/assets/svgs/webhosting.svg" alt="">
             </div>
             <h3 class="text-start fw-bold ps-4 pe-4" >Web Hosting</h3>
-            <p class="text-start ps-4 pe-4" >Cloud hosting, dedicated VPS hosting, container hosting, shared hosting etc.</p>
+            <!-- <div style="height:1px;background-color:#045cb6;opacity: 0.1;" class="mb-3 service-line"></div> -->
+            <p class="text-start text-secondary ps-4 pe-4" >Cloud hosting, dedicated VPS hosting, container hosting, shared hosting etc.</p>
+            <!-- <div style="height:1px;background-color:#045cb6;opacity: 0.1;" class="mb-3 service-line"></div> -->
+            <div class="button text-start pe-4 ps-4">
+              <a class="text-primary text-decoration-none fw-bolder" href="#">Learn More <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+            <br>
           </div>
         </div>
-        <!-- Add more service items as needed -->
       </div>
     </div>
   </section>
   
 
   <!-- Portfolio Section -->
-  <section style="background-color:whitesmoke;" id="portfolio" class="portfolio">
-    <div class="container">
-      <h2 class="text-center mb-4 fs-1">Our Products</h2>
+  <section style="background-color:white;" id="portfolio" class="portfolio">
+    <div class="container text-center">
+      <h2 class="position-relative text-center mb-1 fs-1">Our Products</h2>
+      <div id="line-1" ></div>
+      <br>
+      <br>
       <div class="row">
         <div class="col-sm-12 col-md-4">
           <div class="portfolio-item">
-            <div class="bg-info image-wrapper">
+            <div style="background-color: #045cb6;" class="image-wrapper">
                 <img src="assets/merojob.svg" class="product-image img-fluid" alt="Portfolio Item 1">
             </div>
           </div>
         </div>
         <div class="col-sm-12 col-md-4">
           <div class="portfolio-item">
-            <div class="bg-info image-wrapper">
+            <div style="background-color: #045cb6;" class="image-wrapper">
                 <img src="assets/Realhrsoft.svg" class="product-image img-fluid" alt="Portfolio Item 2">
             </div>
           </div>
         </div>
         <div class="col-sm-12 col-md-4">
           <div class="portfolio-item">
-            <div class="bg-info image-wrapper">
+            <div style="background-color: #045cb6;" class="image-wrapper">
                 <img src="assets/roojgar.svg" class="product-image img-fluid" alt="Portfolio Item 3">
             </div>
           </div>
         </div>
       </div>
     </div>
+    <br>
+    <br>
   </section>
 
-  <!-- Testimonials Section -->
-  <section id="testimonials" class="testimonials text-dark">
+  <!-- Testimonials Section
+ <section id="testimonials" class="testimonials text-dark">
     <div class="container">
-      <h2 class="text-center mb-4">Client Testimonials</h2>
+      <h2 class="position-relative fs-1 text-center mb-4">Client Testimonials<span id="line-1" ></span></h2>
+      <br>
       <div class="splide" id="testimonial-slider">
         <div class="splide__track">
           <ul class="splide__list">
             <li class="splide__slide">
-              <div style="margin-right: 1rem;" class="testimonial-item">
+              <div class="testimonial-item">
                 <blockquote class="blockquote">
                   <div class="splide-image-wrapper">
-                    <img class="splide-image" src="https://cdn.pixabay.com/photo/2021/12/16/17/24/man-6874910_640.jpg" alt="">
+                    <img class="shadow-sm splide-image" src="https://cdn.pixabay.com/photo/2021/12/16/17/24/man-6874910_640.jpg" alt="">
                   </div>
-                  <p class="mb-0">Software Company delivered exactly what we needed. Their attention to detail and quality of work are unmatched.</p>
-                  <footer class="blockquote-footer">John Doe</footer>
+                  <div class="splide-info">
+                    <div class="text-center ">⭐⭐⭐⭐⭐</div>
+                    <div class="text-center fs-6 fw-bold">Software Engineer</div>
+                  </div>
+                  <p class="text-center ps-4 p-4 fs-6 mb-0">Software Company delivered exactly what we needed. Their attention to detail and quality of work are unmatched.</p>
+                  <p class="text-center text-primary" ><i class="fa-solid fa-quote-left"></i></p>
+                  <footer class="text-center p-4 fs-4 blockquote-footer">John Doe</footer>
                 </blockquote>
               </div>
             </li>
             <li class="splide__slide">
-              <div style="margin-right: 1rem;" class="testimonial-item">
+              <div class="testimonial-item">
                 <blockquote class="blockquote">
                   <div class="splide-image-wrapper">
-                    <img class="splide-image" src="https://cdn.pixabay.com/photo/2021/11/19/00/12/man-6807759_640.jpg" alt="ceo">
+                    <img class="shadow-sm splide-image" src="https://cdn.pixabay.com/photo/2022/11/21/15/31/woman-7607337_640.jpg" alt="ceo">
                   </div>
-                  <p class="mb-0">We are very pleased with the professionalism of the Software Company team. They exceeded our expectations.</p>
-                  <footer class="blockquote-footer">Jane Smith</footer>
+                  <div class="splide-info">
+                    <div class="text-center ">⭐⭐⭐⭐⭐</div>
+                    <div class="text-center fs-6 fw-bold">CEO, Infosys</div>
+                  </div>
+                  <p class="text-center ps-4 p-4 fs-6 mb-0">We are very pleased with the professionalism of the Software Company team. They exceeded our expectations.</p>
+                  <p class="text-center text-primary" ><i class="fa-solid fa-quote-left"></i></p>
+                  <footer class="text-center p-4 fs-4 blockquote-footer">Maya Kafle</footer>
+                </blockquote>
+              </div>
+            </li>
+            <li class="splide__slide">
+              <div class="testimonial-item">
+                <blockquote class="blockquote">
+                  <div class="splide-image-wrapper">
+                    <img class="shadow-sm splide-image" src="https://cdn.pixabay.com/photo/2022/11/21/15/47/business-7607426_640.jpg" alt="ceo">
+                  </div>
+                  <div class="splide-info">
+                    <div class="text-center ">⭐⭐⭐⭐⭐</div>
+                    <div class="text-center fs-6 fw-bold">Data Scientist</div>
+                  </div>
+                  <p class="text-center ps-4 p-4 fs-6 mb-0">We are very pleased with the professionalism of the Software Company team. They exceeded our expectations.</p>
+                  <p class="text-center text-primary" ><i class="fa-solid fa-quote-left"></i></p>
+                  <footer class="text-center p-4 fs-4 blockquote-footer">Rahul Sah</footer>
+                </blockquote>
+              </div>
+            </li>
+            <li class="splide__slide">
+              <div class="testimonial-item">
+                <blockquote class="blockquote">
+                  <div class="splide-image-wrapper">
+                    <img class="shadow-sm splide-image" src="https://cdn.pixabay.com/photo/2021/11/19/00/12/man-6807759_640.jpg" alt="ceo">
+                  </div>
+                  <div class="splide-info">
+                    <div class="text-center ">⭐⭐⭐⭐⭐</div>
+                    <div class="text-center fs-6 fw-bold">CEO, Ernst & Young</div>
+                  </div>
+                  <p class="text-center ps-4 p-4 fs-6 mb-0">We are very pleased with the professionalism of the Software Company team. They exceeded our expectations.</p>
+                  <p class="text-center text-primary" ><i class="fa-solid fa-quote-left"></i></p>
+                  <footer class="text-center p-4 fs-4 blockquote-footer">Jane Smith</footer>
                 </blockquote>
               </div>
             </li>
@@ -210,16 +349,77 @@
         </div>
       </div>
     </div>
-  </section>
+  </section>  -->
+
+  <!-- New Testimonial Section -->
+  <section class="testimonial-section text-center">
+    <div class="container">
+      <br>
+      <br>
+        <h2 class="mb-5">What Our Clients Say</h2>
+        <br>
+        <br>
+        <div id="testimonial-slider" class="splide">
+            <div class="splide__track">
+                <ul class="splide__list">
+                    <li class="splide__slide">
+                        <div class="testimonial-card">
+                            <img src="https://cdn.pixabay.com/photo/2022/11/21/15/31/woman-7607337_640.jpg" class="testimonial-img" alt="Client 1">
+                            <p class="testimonial-name mt-3">Jane Smith</p>
+                            <p class="testimonial-position">CEO, Company One</p>
+                            <p class="bg-dark text-center  quote1 text-light" ><i class="fa-solid fa-quote-left"></i></p>
+                            <p style="margin: 0 auto;" class="carousel-text fs-3 w-50 testimonial-quote">This service is truly out of this world. The team went above and beyond to ensure our success. Highly recommended!</p>
+                            <p class="bg-dark text-center quote2 text-light" ><i class="fa-solid fa-quote-right"></i></p>
+                            <div class="splide-info">
+                              <p class="text-center w-100 mt-3">⭐⭐⭐⭐⭐</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="splide__slide">
+                        <div class="testimonial-card">
+                            <img src="https://cdn.pixabay.com/photo/2022/11/21/15/47/business-7607426_640.jpg" class="testimonial-img" alt="Client 2">
+                            <p class="testimonial-name mt-3">John Doe</p>
+                            <p class="testimonial-position">Marketing Director, Business Two</p>
+                            <p class="bg-dark text-center quote1 text-light" ><i class="fa-solid fa-quote-left"></i></p>
+                            <p style="margin: 0 auto;" class="carousel-text fs-3 w-50 testimonial-quote">A game-changer for our company. The expertise and dedication are unmatched. Exceptional experience all around.</p>
+                            <p class="bg-dark text-center quote2 text-light" ><i class="fa-solid fa-quote-right"></i></p>
+                            <div class="splide-info">
+                              <p class="text-center w-100 mt-3">⭐⭐⭐⭐⭐</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="splide__slide">
+                        <div class="testimonial-card">
+                            <img src="https://cdn.pixabay.com/photo/2021/11/19/00/12/man-6807759_640.jpg" class="testimonial-img" alt="Client 3">
+                            <p class="testimonial-name mt-3">Michael Johnson</p>
+                            <p class="testimonial-position">CTO, Tech Three</p>
+                            <p  class="bg-dark text-center quote1 text-light" ><i class="fa-solid fa-quote-left"></i></p>
+                            <p style="margin: 0 auto;" class="carousel-text fs-3 w-50 testimonial-quote">Outstanding service and results. The team was incredibly professional and delivered beyond our expectations.</p>
+                            <p class="bg-dark text-center quote2 text-light" ><i class="fa-solid fa-quote-right"></i></p>
+                            <div class="splide-info">
+                              <p class="text-center w-100 mt-3">⭐⭐⭐⭐⭐</p>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+</section>
   
 
   <!-- Contact Section -->
   <section id="contact" class="contact">
-    <div class="container">
-      <h2 class="text-center mb-4 fs-1">Contact Us</h2>
+    <div class="container text-center">
+      <h2 class="position-relative text-center mb-2 fs-1">Contact Us</h2>
+      <span id="line-1" ></span>
+      <br>
+      <br>
       <div class="row">
         <div class="col-md-6">
-          <form>
+          <form style="background-color: #f5f5f5; border-radius: 8px;" class="shadow-sm p-4" >
             <div class="mb-3">
               <label for="name" class="form-label">Your Name</label>
               <input type="text" class="custom-form form-control" id="name" required>
@@ -232,8 +432,11 @@
               <label for="message" class="form-label">Message</label>
               <textarea class="custom-form form-control" id="message" rows="4" required></textarea>
             </div>
-            <button type="submit" class="btn btn-primary">Send Message</button>
+            <button type="submit" style="background-color: #045cb6; color: white;" id="send-message" class="btn">Send Message</button>
           </form>
+          <div class="mb-2 text-primary" style="cursor: pointer;" id="mail" ><i class="fa-solid fa-envelope"></i> <span> info@aayulogic.com</span></div>
+          <div class="mb-2 text-primary" style="cursor: pointer;" id="number" ><i class="fa-solid fa-phone"></i> <span>+977-01-5920372</span></div>
+          <div class="mb-3 text-primary" style="cursor: pointer;" id="Location" ><i class="fa-solid fa-location-dot"></i> <span>Mitra Marg, Chakupat, Lalitpur </span></div>
         </div>
         <div class="col-md-6 contact-info">
           <div style="width: 100%"><iframe scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=M8HF+W33,%20Mitra%20Marg,%20Lalitpur%2044600,%20Nepal+()&amp;t=&amp;z=15&amp;ie=UTF8&amp;iwloc=B&amp;output=embed" width="100%" height="600" frameborder="0"><a href="https://www.gps.ie/">gps devices</a></iframe></div>
@@ -248,6 +451,7 @@
   </footer>
 
   <!-- Bootstrap Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@3.6.11/dist/js/splide.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script src="index.js" ></script>
