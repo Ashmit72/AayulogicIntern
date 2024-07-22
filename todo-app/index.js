@@ -16,7 +16,7 @@ hide.addEventListener('click',()=>{
 
 async function postData(data){
     try{
-        const response=await fetch(`http://192.168.1.158:8000/register`,{
+        const response=await fetch(`http://192.168.1.180:8000/register`,{
             method:'POST',
             headers:{
                 // "Content-Type":"application/json"

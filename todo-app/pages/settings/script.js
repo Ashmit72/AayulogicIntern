@@ -51,14 +51,14 @@ async function getUserData(){
 //   console.log(user);
   if (!user) return;
 try {
-    const response= await fetch(`http://192.168.1.158:8000/userinfo/?format=json&id=${user}`)
+    const response= await fetch(`http://192.168.1.180:8000/userinfo/?format=json&id=${user}`)
     const {data}=await response.json()
     // console.log(data.profile_picture);
     // console.log(data.username[0].toUpperCase());
     if (response.ok) {
         console.log(data);
         const image=document.querySelector("#img") 
-        data.profile_picture?image.src=`http://192.168.1.158:8000${data.profile_picture}`:image.alt=`${data.username}`[0].toUpperCase()
+        data.profile_picture?image.src=`http://192.168.1.180:8000${data.profile_picture}`:image.alt=`${data.username}`[0].toUpperCase()
         const firstName=document.querySelector("#first-name-input")
         firstName.value=data.first_name
         const lastName=document.querySelector("#last-name-input")
@@ -85,7 +85,7 @@ async function updateGenderById(user,gender){
         gender
     }
     try {
-        const response=await fetch(`http://192.168.1.158:8000/userinfo/?format=json&id=${user}`,{
+        const response=await fetch(`http://192.168.1.180:8000/userinfo/?format=json&id=${user}`,{
             method:'PATCH',
             headers: {
                 'Accept': 'application/json',
@@ -122,7 +122,7 @@ async function updateFirstNameById(user,first_name){
         first_name
     }
     try {
-        const response=await fetch(`http://192.168.1.158:8000/userinfo/?format=json&id=${user}`,{
+        const response=await fetch(`http://192.168.1.180:8000/userinfo/?format=json&id=${user}`,{
             method:'PATCH',
             headers: {
                 'Accept': 'application/json',
@@ -162,7 +162,7 @@ async function updateLastNameById(user,last_name){
         last_name
     }
     try {
-        const response=await fetch(`http://192.168.1.158:8000/userinfo/?format=json&id=${user}`,{
+        const response=await fetch(`http://192.168.1.180:8000/userinfo/?format=json&id=${user}`,{
             method:'PATCH',
             headers: {
                 'Accept': 'application/json',
@@ -208,7 +208,7 @@ const user_id=parseJwt(accessToken,refreshToken)
 form.append("user",user_id)
 
 try {
-    const response=await fetch(`http://192.168.1.158:8000/userinfo/?id=${user_id}`,{
+    const response=await fetch(`http://192.168.1.180:8000/userinfo/?id=${user_id}`,{
     method:'PATCH',
     body:form,
     })
@@ -238,7 +238,7 @@ async function getCurrentPassword(){
   const user = parseJwt(accessToken);
   if (!user) return;
     try {
-        const response=await fetch(`http://192.168.1.158:8000/userinfo/?format=json&id=${user}`)
+        const response=await fetch(`http://192.168.1.180:8000/userinfo/?format=json&id=${user}`)
         const {data}=await response.json()
         const {password}=data
         return password;
@@ -254,7 +254,7 @@ async function patchPasswordById(id,password,confirmPassword){
         password2:confirmPassword
     }
   try {
-    const response=await fetch(`http://192.168.1.158:8000/userinfo/?id=${id}`,{
+    const response=await fetch(`http://192.168.1.180:8000/userinfo/?id=${id}`,{
         method:'PATCH',
         body:JSON.stringify(data),
         headers:{

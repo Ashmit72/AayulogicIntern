@@ -23,7 +23,7 @@ Photo.addEventListener('click',()=>{
 
 async function logOut() {
   try {
-    const response = await fetch(`http://192.168.1.158:8000/logout`, {
+    const response = await fetch(`http://192.168.1.180:8000/logout`, {
       method: 'POST',
       headers: {
         "Content-type": "application/json; charset=UTF-8",
@@ -66,7 +66,7 @@ async function getUserName() {
   if (!user) return;
 
   try {
-    const response = await fetch(`http://192.168.1.158:8000/userinfo/?format=json&id=${user}`);
+    const response = await fetch(`http://192.168.1.180:8000/userinfo/?format=json&id=${user}`);
     const { data } = await response.json();
     const title = document.querySelector("#nav-title");
     const date = new Date();
@@ -77,7 +77,7 @@ async function getUserName() {
 
     const image = document.querySelector("#profile-img");
     if (data.profile_picture) {
-      image.src = `http://192.168.1.158:8000${data.profile_picture}`;
+      image.src = `http://192.168.1.180:8000${data.profile_picture}`;
     } else {
       image.alt = data.username[0].toUpperCase();
     }
@@ -94,7 +94,7 @@ async function getData() {
   if (!user) return;
 
   try {
-    const response = await fetch(`http://192.168.1.158:8000/todo/?format=json&id=${user}`, {
+    const response = await fetch(`http://192.168.1.180:8000/todo/?format=json&id=${user}`, {
       method: 'GET',
       headers: {
         "Authorization": `Bearer ${accessToken}`,
@@ -184,7 +184,7 @@ async function getSingleData(id) {
   if (!user) return;
 
   try {
-    const response = await fetch(`http://192.168.1.158:8000/todo/?format=json&id=${user}&tid=${id}`, {
+    const response = await fetch(`http://192.168.1.180:8000/todo/?format=json&id=${user}&tid=${id}`, {
       headers: {
         "Authorization": `Bearer ${accessToken}`,
         "Content-type": "application/json; charset=UTF-8",
@@ -202,7 +202,7 @@ async function editSingleData(id, title, description) {
   if (!user) return;
 
   try {
-    const response = await fetch(`http://192.168.1.158:8000/todo/?format=json&id=${id}`, {
+    const response = await fetch(`http://192.168.1.180:8000/todo/?format=json&id=${id}`, {
       method: "PATCH",
       body: JSON.stringify({ title, description }),
       headers: {
@@ -230,7 +230,7 @@ async function deleteData(id) {
   if (!user) return;
 
   try {
-    const response = await fetch(`http://192.168.1.158:8000/todo/?format=json&id=${id}`, {
+    const response = await fetch(`http://192.168.1.180:8000/todo/?format=json&id=${id}`, {
       method: "DELETE",
       headers: {
         "Authorization": `Bearer ${accessToken}`,
@@ -255,7 +255,7 @@ async function postData(data) {
   if (!user) return;
 
   try {
-    const response = await fetch(`http://192.168.1.158:8000/todo/?format=json`, {
+    const response = await fetch(`http://192.168.1.180:8000/todo/?format=json`, {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
@@ -283,7 +283,7 @@ async function updateTaskStatus(id, status) {
   if (!user) return;
 
   try {
-    const response = await fetch(`http://192.168.1.158:8000/todo/?format=json&id=${id}`, {
+    const response = await fetch(`http://192.168.1.180:8000/todo/?format=json&id=${id}`, {
       method: "PATCH",
       body: JSON.stringify({ is_done: status }),
       headers: {

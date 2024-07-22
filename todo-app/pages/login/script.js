@@ -17,7 +17,7 @@ eyeSlash.addEventListener('click',()=>{
 
 async function postLoginData(data){
     try {
-    const response=await fetch(`http://192.168.1.158:8000/login/`,{
+    const response=await fetch(`http://192.168.1.180:8000/login/`,{
         method:'POST',
         headers:{
         "Content-type": "application/json; charset=UTF-8",
