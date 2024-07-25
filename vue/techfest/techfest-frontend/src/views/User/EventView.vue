@@ -1,11 +1,8 @@
-<template lang="">
-<h1>This is event page</h1>
-</template>
-<script>
-export default {
+<template>
+    <router-view></router-view>
+    </template>
+    <script></script>
     
-}
-</script>
-<style lang="">
+    <style scoped>
+    </style>
     
-</style>

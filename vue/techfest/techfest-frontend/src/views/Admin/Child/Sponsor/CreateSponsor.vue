@@ -1,4 +1,131 @@
-<template lang="">
+<script setup>
+import { ref, onMounted } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+import axios from 'axios';
+import Cookies from 'js-cookie';
+import { api } from '@/api';
+import { useToast } from 'vue-toast-notification';
+
+const route = useRoute();
+const router = useRouter();
+const toast = useToast();
+
+const id = route.params.id;
+
+const sponsorData = ref({
+  name: '',
+  image: null,
+  level: null,
+  link: '',
+  description: '',
+  status: ''
+});
+
+const sponsorLevelList = ref([]);
+const config = {
+  headers: {
+    Authorization: `Bearer ${Cookies.get('token')}`
+  }
+};
+
+const getSponsorLevel = async () => {
+  try {
+    const res = await axios.get(`${api()}/v1/sponsor-level?page=1&per_page=10`);
+    sponsorLevelList.value = res.data.levels;
+  } catch (error) {
+    toast.error('Failed to fetch sponsor levels', { position: 'top-right' });
+  }
+};
+
+const getSponsorDataById = async () => {
+  try {
+    const response = await axios.get(`${api()}/v1/sponsor/${id}`);
+    if (response.status === 200) {
+      sponsorData.value = {
+        ...response.data,
+        level: response.data.level,
+        image: response.data.sponsorImage
+      };
+    }
+  } catch (error) {
+    toast.error(error.response?.data?.error || 'Failed to fetch data', {
+      position: 'top-right'
+    });
+  }
+};
+
+const submitForm = async () => {
+  if (id) {
+    await patchSponsorData();
+  } else {
+    await postSponsorData();
+  }
+};
+
+const postSponsorData = async () => {
+  const form = new FormData();
+  for (const key in sponsorData.value) {
+    form.append(key, sponsorData.value[key]);
+  }
+  try {
+    const response = await axios.post(`${api()}/v1/sponsor/create`, form, config);
+    if (response.status === 200) {
+      router.push('/admin/sponsor');
+      resetForm();
+    } else {
+      toast.error('Something Went Wrong!', { position: 'top-right' });
+    }
+  } catch (error) {
+    toast.error(error.response?.data?.error || 'Failed to submit data', {
+      position: 'top-right'
+    });
+  }
+};
+
+const patchSponsorData = async () => {
+  const form = new FormData();
+  for (const key in sponsorData.value) {
+    form.append(key, sponsorData.value[key]);
+  }
+  try {
+    const response = await axios.patch(`${api()}/v1/sponsor/${id}`, form, config);
+    if (response.status === 200) {
+      router.push('/admin/sponsor');
+      resetForm();
+    } else {
+      toast.error('Something Went Wrong!', { position: 'top-right' });
+    }
+  } catch (error) {
+    toast.error(error.response?.data?.error || 'Failed to update data', {
+      position: 'top-right'
+    });
+  }
+};
+
+const setStatus = (status) => {
+  sponsorData.value.status = status;
+};
+
+const resetForm = () => {
+  sponsorData.value = {
+    name: '',
+    image: null,
+    level: null,
+    link: '',
+    description: '',
+    status: ''
+  };
+};
+
+onMounted(() => {
+  getSponsorLevel();
+  if (id) {
+    getSponsorDataById();
+  }
+});
+</script>
+
+<template>
   <v-form @submit.prevent="submitForm">
     <v-text-field 
       v-model="sponsorData.name"
@@ -53,127 +180,6 @@
     </div>
   </v-form>
 </template>
-
-<script>
-import { api } from '@/api';
-import axios from 'axios';
-import Cookies from 'js-cookie';
-
-export default {
-  data() {
-    return {
-      id: this.$route.params.id,
-      sponsorData: {
-        name: '',
-        image: null,
-        level: null,
-        link: '',
-        description: '',
-        status: ''
-      },
-      config: {
-        headers: {
-          Authorization: `Bearer ${Cookies.get('token')}`
-        }
-      },
-      sponsorLevelList: []
-    };
-  },
-  methods: {
-    async getSponsorLevel(){
-      axios.get(`${api()}/v1/sponsor-level?page=1&per_page=10`).then((res)=>{
-        console.log(res.data.levels)
-        this.sponsorLevelList = res.data.levels
-      })
-    },
-    async getSponsorDataById() {
-      try {
-        const response = await axios.get(`${api()}/v1/sponsor/${this.id}`);
-        if (response.status === 200) {
-          this.sponsorData = {
-            ...response.data,
-            level:response.data.level,
-            image: response.data.sponsorImage
-          };
-          console.log(this.sponsorData,"k cha")
-        }
-      } catch (error) {
-        this.$toast.error(error.response?.data?.error || 'Failed to fetch data', {
-          position: 'top-right'
-        });
-      }
-    },
-    async submitForm() {
-      if (this.id) {
-        await this.patchSponsorData();
-      } else {
-        await this.postSponsorData();
-      }
-    },
-    async postSponsorData() {
-      const form = new FormData();
-      for (const key in this.sponsorData) {
-        form.append(key, this.sponsorData[key]);
-      }
-      try {
-        const response = await axios.post(`${api()}/v1/sponsor/create`, form, this.config);
-        if (response.status === 200) {
-          this.$router.push('/admin/sponsor');
-          this.resetForm();
-        } else {
-          this.$toast.error('Something Went Wrong!', {
-            position: 'top-right'
-          });
-        }
-      } catch (error) {
-        this.$toast.error(error.response?.data?.error || 'Failed to submit data', {
-          position: 'top-right'
-        });
-      }
-    },
-    async patchSponsorData() {
-      const form = new FormData();
-      for (const key in this.sponsorData) {
-        form.append(key, this.sponsorData[key]);
-      }
-      try {
-        const response = await axios.patch(`${api()}/v1/sponsor/${this.id}`, form, this.config);
-        if (response.status === 200) {
-          this.$router.push('/admin/sponsor');
-          this.resetForm();
-        } else {
-          this.$toast.error('Something Went Wrong!', {
-            position: 'top-right'
-          });
-        }
-      } catch (error) {
-        this.$toast.error(error.response?.data?.error || 'Failed to update data', {
-          position: 'top-right'
-        });
-      }
-    },
-    setStatus(status) {
-      this.sponsorData.status = status;
-    },
-    resetForm() {
-      this.sponsorData = {
-        name: '',
-        image: null,
-        level: null,
-        link: '',
-        description: '',
-        status: ''
-      };
-    }
-  },
-  mounted() {
-    this.getSponsorLevel()
-    if (this.id) {
-      this.getSponsorDataById();
-    }
-  }
-}
-</script>
 
 <style>
 .buttons {

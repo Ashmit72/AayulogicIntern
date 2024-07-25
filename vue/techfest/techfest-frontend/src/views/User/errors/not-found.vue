@@ -1,3 +1,13 @@
+
+<script setup >
+import { useRouter } from 'vue-router';
+
+const router=useRouter()
+const goPrevpage=()=> {
+      router.go(-1)
+    }
+</script>
+
 <template>
   <v-content>
     <div class="block notfound text-center">
@@ -10,16 +20,6 @@
     </div>
   </v-content>
 </template>
-
-<script>
-export default {
-methods:{
-  goPrevpage(){
-    this.$router.go(-1)
-  }
-}
-}
-</script>
 
 <style lang="scss" scoped>
 .notfound {

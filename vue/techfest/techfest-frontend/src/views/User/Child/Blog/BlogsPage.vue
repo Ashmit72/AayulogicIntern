@@ -1,3 +1,31 @@
+<script setup >
+import { api } from '@/api';
+import axios from 'axios';
+import { onMounted, ref } from 'vue';
+import { useToast } from 'vue-toast-notification';
+
+ const blogData= ref([])
+const toast=useToast()
+
+ onMounted(()=>{
+  getBlogData()
+ })
+
+const getBlogData=async()=> {
+        try {
+          const response = await axios.get(`${api()}/v1/frontend/blog?per_page=10&page=1`)
+          if (response.status === 200) {
+            blogData.value = response.data.blogs
+          }
+        } catch (error) {
+          toast.error(error.message, {
+            position: 'top-right'
+          })
+        }
+      }
+    
+
+</script>
 <template>
     <v-row>
       <v-col xl="6" v-for="blog in blogData">
@@ -7,7 +35,7 @@
           <v-card-subtitle>Created At {{ blog.createdAt }}</v-card-subtitle>
           <v-card-actions>
             <router-link :to="`blog/${blog.slug}`" >
-            <v-btn variant="tonal" color="orange-lighten-2" text="Explore"></v-btn>
+            <v-btn variant="tonal" color="green-lighten-2" text="Explore"></v-btn>
           </router-link>
             <v-spacer></v-spacer>
           </v-card-actions>
@@ -15,35 +43,6 @@
       </v-col>
     </v-row>
   </template>
-  <script>
-  import { api } from '@/api'
-  import axios from 'axios'
-  
-  export default {
-    data() {
-      return {
-        blogData: []
-      }
-    },
-    mounted() {
-      this.getBlogData()
-    },
-    methods: {
-      async getBlogData() {
-        try {
-          const response = await axios.get(`${api()}/v1/frontend/blog?per_page=10&page=1`)
-          if (response.status === 200) {
-            this.blogData = response.data.blogs
-          }
-        } catch (error) {
-          this.$toast.error(error.message, {
-            position: 'top-right'
-          })
-        }
-      }
-    }
-  }
-  </script>
   
   <style scoped>
   .blog-container {

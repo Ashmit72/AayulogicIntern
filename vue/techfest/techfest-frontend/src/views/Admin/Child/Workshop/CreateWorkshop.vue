@@ -1,4 +1,120 @@
-<template lang="">
+<script setup>
+import { api } from '@/api';
+import axios from 'axios';
+import Cookies from 'js-cookie';
+import { onMounted, ref } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+import { useToast } from 'vue-toast-notification';
+
+const route = useRoute();
+const router = useRouter();
+const toast = useToast();
+
+const config = {
+  headers: {
+    Authorization: `Bearer ${Cookies.get('token')}`,
+  },
+};
+
+const id = route.params.id;
+const workshopData = ref({
+  title: '',
+  image: null,
+  link: '',
+  description: '',
+  status: '',
+});
+
+onMounted(() => {
+  if (id) {
+    getWorkshopDataById();
+  }
+});
+
+const getWorkshopDataById = async () => {
+  try {
+    const response = await axios.get(`${api()}/v1/workshop/${id}`);
+    if (response.status === 200) {
+      workshopData.value = {
+        ...response.data,
+        image: response.data.workshopImage,
+      };
+    }
+  } catch (error) {
+    toast.error(error.response?.data?.error || 'Failed to fetch data', {
+      position: 'top-right',
+    });
+  }
+};
+
+const submitForm = async () => {
+  if (id) {
+    await patchWorkshopData();
+  } else {
+    await postWorkshopData();
+  }
+};
+
+const postWorkshopData = async () => {
+  const form = new FormData();
+  for (const key in workshopData.value) {
+    form.append(key, workshopData.value[key]);
+  }
+  try {
+    const response = await axios.post(`${api()}/v1/workshop/create`, form, config);
+    if (response.status === 200) {
+      router.push('/admin/workshop');
+      resetForm();
+    } else {
+      toast.error('Something Went Wrong!', {
+        position: 'top-right',
+      });
+    }
+  } catch (error) {
+    toast.error(error.response?.data?.error || 'Failed to submit data', {
+      position: 'top-right',
+    });
+  }
+};
+
+const patchWorkshopData = async () => {
+  const form = new FormData();
+  for (const key in workshopData.value) {
+    form.append(key, workshopData.value[key]);
+  }
+  try {
+    const response = await axios.patch(`${api()}/v1/workshop/${id}`, form, config);
+    if (response.status === 200) {
+      router.push('/admin/workshop');
+      resetForm();
+    } else {
+      toast.error('Something Went Wrong!', {
+        position: 'top-right',
+      });
+    }
+  } catch (error) {
+    toast.error(error.response?.data?.error || 'Failed to update data', {
+      position: 'top-right',
+    });
+  }
+};
+
+const setStatus = (status) => {
+  workshopData.value.status = status;
+};
+
+const resetForm = () => {
+  workshopData.value = {
+    title: '',
+    image: null,
+    link: '',
+    description: '',
+    status: '',
+  };
+};
+</script>
+
+<template>
   <v-form @submit.prevent="submitForm">
     <v-text-field
       v-model="workshopData.title"
@@ -38,115 +154,6 @@
     </div>
   </v-form>
 </template>
-
-<script>
-import { api } from '@/api';
-import axios from 'axios';
-import Cookies from 'js-cookie';
-
-export default {
-  data() {
-    return {
-      id: this.$route.params.id,
-      workshopData: {
-        title: '',
-        image: null,
-        link: '',
-        description: '',
-        status: ''
-      },
-      config: {
-        headers: {
-          Authorization: `Bearer ${Cookies.get('token')}`
-        }
-      }
-    };
-  },
-  methods: {
-    async getWorkshopDataById() {
-      try {
-        const response = await axios.get(`${api()}/v1/workshop/${this.id}`);
-        if (response.status === 200) {
-          this.workshopData = {
-            ...response.data,
-            image: response.data.workshopImage
-          };
-        }
-      } catch (error) {
-        this.$toast.error(error.response?.data?.error || 'Failed to fetch data', {
-          position: 'top-right'
-        });
-      }
-    },
-    async submitForm() {
-      if (this.id) {
-        await this.patchWorkshopData();
-      } else {
-        await this.postWorkshopData();
-      }
-    },
-    async postWorkshopData() {
-      const form = new FormData();
-      for (const key in this.workshopData) {
-        form.append(key, this.workshopData[key]);
-      }
-      try {
-        const response = await axios.post(`${api()}/v1/workshop/create`, form, this.config);
-        if (response.status === 200) {
-          this.$router.push('/admin/workshop');
-          this.resetForm();
-        } else {
-          this.$toast.error('Something Went Wrong!', {
-            position: 'top-right'
-          });
-        }
-      } catch (error) {
-        this.$toast.error(error.response?.data?.error || 'Failed to submit data', {
-          position: 'top-right'
-        });
-      }
-    },
-    async patchWorkshopData() {
-      const form = new FormData();
-      for (const key in this.workshopData) {
-        form.append(key, this.workshopData[key]);
-      }
-      try {
-        const response = await axios.patch(`${api()}/v1/workshop/${this.id}`, form, this.config);
-        if (response.status === 200) {
-          this.$router.push('/admin/workshop');
-          this.resetForm();
-        } else {
-          this.$toast.error('Something Went Wrong!', {
-            position: 'top-right'
-          });
-        }
-      } catch (error) {
-        this.$toast.error(error.response?.data?.error || 'Failed to update data', {
-          position: 'top-right'
-        });
-      }
-    },
-    setStatus(status) {
-      this.workshopData.status = status;
-    },
-    resetForm() {
-      this.workshopData = {
-        title: '',
-        image: null,
-        link: '',
-        description: '',
-        status: ''
-      };
-    }
-  },
-  mounted() {
-    if (this.id) {
-      this.getWorkshopDataById();
-    }
-  }
-}
-</script>
 
 <style>
 .buttons {

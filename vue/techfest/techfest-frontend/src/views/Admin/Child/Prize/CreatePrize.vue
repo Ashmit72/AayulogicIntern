@@ -27,111 +27,117 @@
   </v-form>
 </template>
 
-<script>
-import { api } from '@/api'
-import axios from 'axios'
-import Cookies from 'js-cookie'
+<script setup>
+import { ref, onMounted } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+import axios from 'axios';
+import Cookies from 'js-cookie';
+import { api } from '@/api';
+import { useToast } from 'vue-toast-notification';
 
-export default {
-  data() {
-    return {
-      id: this.$route.params.id,
-      prizeData: {
-        title: '',
-        image: null,
-        description: '',
-        status: ''
-      },
-      config: {
-        headers: {
-          Authorization: `Bearer ${Cookies.get('token')}`
-        }
-      }
-    }
-  },
-  methods: {
-    async getPrizeDataById() {
-      try {
-        const response = await axios.get(`${api()}/v1/prize/${this.id}`)
-        if (response.status === 200) {
-          this.prizeData = {
-            ...response.data,
-            image: response.data.prizeImage
-          }
-        }
-      } catch (error) {
-        this.$toast.error(error.response?.data?.error || 'Failed to fetch data', {
-          position: 'top-right'
-        })
-      }
-    },
-    async submitForm() {
-      if (this.id) {
-        await this.patchPrizeData()
-      } else {
-        await this.postPrizeData()
-      }
-    },
-    async postPrizeData() {
-      const form = new FormData()
-      for (const key in this.prizeData) {
-        form.append(key, this.prizeData[key])
-      }
-      try {
-        const response = await axios.post(`${api()}/v1/prize/create`, form, this.config)
-        if (response.status === 200) {
-          this.$router.push('/admin/prize')
-          this.resetForm()
-        } else {
-          this.$toast.error('Something Went Wrong!', {
-            position: 'top-right'
-          })
-        }
-      } catch (error) {
-        this.$toast.error(error.response?.data?.error || 'Failed to submit data', {
-          position: 'top-right'
-        })
-      }
-    },
-    async patchPrizeData() {
-      const form = new FormData()
-      for (const key in this.prizeData) {
-        form.append(key, this.prizeData[key])
-      }
-      try {
-        const response = await axios.patch(`${api()}/v1/prize/${this.id}`, form, this.config)
-        if (response.status === 200) {
-          this.$router.push('/admin/prize')
-          this.resetForm()
-        } else {
-          this.$toast.error('Something Went Wrong!', {
-            position: 'top-right'
-          })
-        }
-      } catch (error) {
-        this.$toast.error(error.response?.data?.error || 'Failed to update data', {
-          position: 'top-right'
-        })
-      }
-    },
-    setStatus(status) {
-      this.prizeData.status = status
-    },
-    resetForm() {
-      this.prizeData = {
-        title: '',
-        image: null,
-        description: '',
-        status: ''
-      }
-    }
-  },
-  mounted() {
-    if (this.id) {
-      this.getPrizeDataById()
-    }
+const route = useRoute();
+const router = useRouter();
+const toast = useToast();
+
+const id = route.params.id;
+const prizeData = ref({
+  title: '',
+  image: null,
+  description: '',
+  status: ''
+});
+const config = {
+  headers: {
+    Authorization: `Bearer ${Cookies.get('token')}`
   }
-}
+};
+
+const getPrizeDataById = async () => {
+  try {
+    const response = await axios.get(`${api()}/v1/prize/${id}`);
+    if (response.status === 200) {
+      prizeData.value = {
+        ...response.data,
+        image: response.data.prizeImage
+      };
+    }
+  } catch (error) {
+    toast.error(error.response?.data?.error || 'Failed to fetch data', {
+      position: 'top-right'
+    });
+  }
+};
+
+const submitForm = async () => {
+  if (id) {
+    await patchPrizeData();
+  } else {
+    await postPrizeData();
+  }
+};
+
+const postPrizeData = async () => {
+  const form = new FormData();
+  for (const key in prizeData.value) {
+    form.append(key, prizeData.value[key]);
+  }
+  try {
+    const response = await axios.post(`${api()}/v1/prize/create`, form, config);
+    if (response.status === 200) {
+      router.push('/admin/prize');
+      resetForm();
+    } else {
+      toast.error('Something Went Wrong!', {
+        position: 'top-right'
+      });
+    }
+  } catch (error) {
+    toast.error(error.response?.data?.error || 'Failed to submit data', {
+      position: 'top-right'
+    });
+  }
+};
+
+const patchPrizeData = async () => {
+  const form = new FormData();
+  for (const key in prizeData.value) {
+    form.append(key, prizeData.value[key]);
+  }
+  try {
+    const response = await axios.patch(`${api()}/v1/prize/${id}`, form, config);
+    if (response.status === 200) {
+      router.push('/admin/prize');
+      resetForm();
+    } else {
+      toast.error('Something Went Wrong!', {
+        position: 'top-right'
+      });
+    }
+  } catch (error) {
+    toast.error(error.response?.data?.error || 'Failed to update data', {
+      position: 'top-right'
+    });
+  }
+};
+
+const setStatus = (status) => {
+  prizeData.value.status = status;
+};
+
+const resetForm = () => {
+  prizeData.value = {
+    title: '',
+    image: null,
+    description: '',
+    status: ''
+  };
+};
+
+onMounted(() => {
+  if (id) {
+    getPrizeDataById();
+  }
+});
 </script>
 
 <style scoped>

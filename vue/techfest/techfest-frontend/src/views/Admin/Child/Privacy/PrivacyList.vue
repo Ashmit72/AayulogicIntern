@@ -25,103 +25,116 @@
 </template>
 
 <script>
+import { ref, onMounted } from 'vue';
+import { useToast } from 'vue-toast-notification';
 import { api } from '@/api';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
 export default {
-  data() {
-    return {
-      loading: false,
-      privacyData: {},
-      config: {
-        headers: {
-          Authorization: `Bearer ${Cookies.get('token')}`
-        }
+  setup() {
+    const loading = ref(false);
+    const privacyData = ref({});
+    const toast = useToast();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${Cookies.get('token')}`,
       },
     };
-  },
-  methods: {
-    async getprivacyData() {
+
+    const getprivacyData = async () => {
       try {
-        this.loading = true;
-        const response = await axios.get(`${api()}/v1/privacy`, this.config);
+        loading.value = true;
+        const response = await axios.get(`${api()}/v1/privacy`, config);
         if (response.status === 200) {
-          this.privacyData = response.data;
+          privacyData.value = response.data;
         } else {
           console.log('Something Went Wrong');
         }
       } catch (error) {
         console.log(error.message);
       } finally {
-        this.loading = false;
+        loading.value = false;
       }
-    },
-    async postprivacyData() {
-      try {
-        this.loading = true;
-        const response = await axios.post(`${api()}/v1/privacy/create`, this.privacyData, this.config);
-        if (response.status === 200) {
-          this.privacyData.status = 'Draft';
-          this.getprivacyData()
-          this.$toast.success('Successfully Created', {
-            position: 'top-right'
-          });
-        } else {
-          this.$toast.error('Something Went Wrong', {
-            position: 'top-right'
-          });
-        }
-      } catch (error) {
-        this.$toast.error(error.response.data.error, {
-          position: 'top-right'
-        });
-      } finally {
-        this.loading = false;
-      }
-    },
-    async patchprivacyData() {
-      try {
-        this.loading = true;
-        const response = await axios.patch(`${api()}/v1/privacy/update`, this.privacyData, this.config);
-        if (response.status === 200) {
-          this.$toast.success(`Successfully ${this.privacyData.status}`, {
-            position: 'top-right'
-          });
-        } else {
-          this.$toast.error('Something Went Wrong', {
-            position: 'top-right'
-          });
-        }
-      } catch (error) {
-        this.$toast.error(error.response.data.error, {
-          position: 'top-right'
-        });
-      } finally {
-        this.loading = false;
-      }
-    },
-    createTerm(){
-     this.privacyData.status='Draft',
-     console.log(this.privacyData.status);
-     this.postprivacyData();
-    },
-    publishTerm() {
-      this.privacyData.status = 'Published';
-      this.patchprivacyData();
-    },
-    saveDraft() {
-      this.privacyData.status = 'Draft';
-      this.patchprivacyData();
-      
-    },
-  },
-  mounted() {
-    // alert("this")
-    this.getprivacyData();
-  },unmounted(){
+    };
 
-  }
+    const postprivacyData = async () => {
+      try {
+        loading.value = true;
+        const response = await axios.post(`${api()}/v1/privacy/create`, privacyData.value, config);
+        if (response.status === 200) {
+          privacyData.value.status = 'Draft';
+          getprivacyData();
+          toast.success('Successfully Created', {
+            position: 'top-right',
+          });
+        } else {
+          toast.error('Something Went Wrong', {
+            position: 'top-right',
+          });
+        }
+      } catch (error) {
+        toast.error(error.response.data.error, {
+          position: 'top-right',
+        });
+      } finally {
+        loading.value = false;
+      }
+    };
+
+    const patchprivacyData = async () => {
+      try {
+        loading.value = true;
+        const response = await axios.patch(`${api()}/v1/privacy/update`, privacyData.value, config);
+        if (response.status === 200) {
+          toast.success(`Successfully ${privacyData.value.status}`, {
+            position: 'top-right',
+          });
+        } else {
+          toast.error('Something Went Wrong', {
+            position: 'top-right',
+          });
+        }
+      } catch (error) {
+        toast.error(error.response.data.error, {
+          position: 'top-right',
+        });
+      } finally {
+        loading.value = false;
+      }
+    };
+
+    const createTerm = () => {
+      privacyData.value.status = 'Draft';
+      console.log(privacyData.value.status);
+      postprivacyData();
+    };
+
+    const publishTerm = () => {
+      privacyData.value.status = 'Published';
+      patchprivacyData();
+    };
+
+    const saveDraft = () => {
+      privacyData.value.status = 'Draft';
+      patchprivacyData();
+    };
+
+    onMounted(() => {
+      getprivacyData();
+    });
+
+    return {
+      loading,
+      privacyData,
+      createTerm,
+      publishTerm,
+      saveDraft,
+      postprivacyData,
+      patchprivacyData,
+    };
+  },
 };
 </script>
 

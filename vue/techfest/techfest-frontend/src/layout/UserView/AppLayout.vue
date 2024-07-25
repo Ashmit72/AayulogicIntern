@@ -1,12 +1,18 @@
 <template>
-  <v-app :dark="isDarkMode">
+  <v-app>
     <v-app-bar
       class="position-fixed border"
       rounded="pill"
       height="80"
-      v-resize="onResize"
+      
       color="rgba(var(--v-theme-surface),0.8)"
-      style="backdrop-filter: blur(4px); width: 96%; left: 50%; top:7px; transform: translateX(-50%);"
+      style="
+        backdrop-filter: blur(4px);
+        width: 96%;
+        left: 50%;
+        top: 7px;
+        transform: translateX(-50%);
+      "
     >
       <v-container>
         <v-row align="center">
@@ -15,7 +21,15 @@
           </v-btn>
           <v-spacer></v-spacer>
           <div class="hidden-md-and-down">
-            <v-btn v-for="link in navLinks" :key="link.to" :color="link.color" :height="link.height" :variant="link.variant" :rounded="link.rounded" :to="link.to">
+            <v-btn
+              v-for="link in navLinks"
+              :key="link.to"
+              :color="link.color"
+              :height="link.height"
+              :variant="link.variant"
+              :rounded="link.rounded"
+              :to="link.to"
+            >
               {{ link.label }}
             </v-btn>
             <v-menu open-on-hover>
@@ -33,10 +47,22 @@
             </v-menu>
           </div>
           <v-spacer></v-spacer>
-          <v-btn color="primary" height="50" rounded="lg" @click="toggleTheme" aria-label="Toggle Theme">
+          <v-btn
+            color="primary"
+            height="50"
+            rounded="lg"
+            @click="toggleTheme"
+            aria-label="Toggle Theme"
+          >
             <v-icon :icon="isDarkMode ? 'mdi-weather-night' : 'mdi-weather-sunny'"></v-icon>
           </v-btn>
-          <v-app-bar-nav-icon class="hidden-lg-and-up" color="primary" rounded="lg" @click.stop="drawer = !drawer" aria-label="Open Drawer"></v-app-bar-nav-icon>
+          <v-app-bar-nav-icon
+            class="hidden-lg-and-up"
+            color="primary"
+            rounded="lg"
+            @click.stop="drawer = !drawer"
+            aria-label="Open Drawer"
+          ></v-app-bar-nav-icon>
         </v-row>
       </v-container>
     </v-app-bar>
@@ -44,11 +70,18 @@
     <!-- Navigation drawer -->
     <v-navigation-drawer v-model="drawer" temporary :location="'right'">
       <v-list class="mb-4" density="compact" nav>
-        <v-list-item v-for="item in drawerItems" :key="item.value" :prepend-icon="item.icon" :title="item.title" :to="item.to" link></v-list-item>
+        <v-list-item
+          v-for="item in drawerItems"
+          :key="item.value"
+          :prepend-icon="item.icon"
+          :title="item.title"
+          :to="item.to"
+          link
+        ></v-list-item>
         <v-divider v-for="(item, index) in drawerItems" :key="index"></v-divider>
       </v-list>
       <v-list-item class="mob-login">
-        <v-btn @click="handleAuth" color="info">{{ isAuthenticated ? 'Logout' : 'Login' }}</v-btn>
+        <v-btn @click="handleAuth" color="info">{{ isAuth ? 'Logout' : 'Login' }}</v-btn>
       </v-list-item>
     </v-navigation-drawer>
 
@@ -60,72 +93,64 @@
   </v-app>
 </template>
 
-<script>
-import isAuthenticated from '@/utils';
+<script setup>
+import { ref, computed, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
 import Cookies from 'js-cookie';
+import isAuthenticated from '@/utils';
+import { useTheme } from 'vuetify/lib/framework.mjs';
 
-export default {
-  data() {
-    return {
-      moreLinks: [
-        { to: '/teams', label: 'Teams' },
-        { to: '/workshops', label: 'Workshops' },
-        { to: '/prizes', label: 'Prizes' },
-        { to: '/sponsors', label: 'Sponsors' },
-        { to: '/faq', label: 'FAQ' },
-      ],
-      drawer: false,
-      isDarkMode: JSON.parse(localStorage.getItem('dark-mode')) || true,
-      navLinks: [
-        { to: '/blog', label: 'Blogs', color: 'primary', height: '50', variant: 'text', rounded: 'lg' },
-        { to: '/events', label: 'Events', color: 'primary', height: '50', variant: 'text', rounded: 'lg' },
-        { to: '/contact', label: 'Contact Us', color: 'primary', height: '50', variant: 'text', rounded: 'lg' },
-      ],
-      drawerItems: [
-        { icon: 'mdi-forum', title: 'Blogs', value: 'blogs', to: '/blog' },
-        { icon: 'mdi-calendar-clock', title: 'Events', value: 'events', to: '/events' },
-        { icon: 'mdi-frequently-asked-questions', title: 'FAQ', value: 'faq', to: '/faq' },
-        { icon: 'mdi-seal', title: 'Prizes', value: 'prizes', to: '/prizes' },
-        { icon: 'mdi-domain', title: 'Workshops', value: 'workshops', to: '/workshops' },
-        { icon: 'mdi-account-multiple', title: 'Teams', value: 'teams', to: '/teams' },
-        { icon: 'mdi-cash-refund', title: 'Sponsors', value: 'sponsors', to: '/sponsors' },
-      ],
-    };
-  },
-  computed: {
-    isAuthenticated() {
-      return isAuthenticated();
-    },
-  },
-  mounted() {
-    this.onResize();
-    window.addEventListener('resize', this.onResize);
-    this.setTheme();
-  },
-  beforeDestroy() {
-    window.removeEventListener('resize', this.onResize);
-  },
-  methods: {
-    toggleTheme() {
-      this.isDarkMode = !this.isDarkMode;
-      this.setTheme();
-    },
-    setTheme() {
-      this.$vuetify.theme.global.name = this.isDarkMode ? 'dark' : 'light';
-      localStorage.setItem('dark-mode', JSON.stringify(this.isDarkMode));
-    },
-    onResize() {
-      this.windowSize = { x: window.innerWidth, y: window.innerHeight };
-    },
-    handleAuth() {
-      if (this.isAuthenticated) {
-        Cookies.remove('token');
-        window.location.reload();
-      } else {
-        this.$router.push('/login');
-      }
-    },
-  },
+const drawer = ref(false);
+const isDarkMode = ref(false);
+const theme = useTheme();
+
+const isAuth = computed(() => isAuthenticated());
+
+const moreLinks = [
+  { to: '/teams', label: 'Teams' },
+  { to: '/workshops', label: 'Workshops' },
+  { to: '/terms', label: 'Terms' },
+  { to: '/policies', label: 'Policies' },
+  { to: '/faq', label: 'FAQ' }
+];
+
+const navLinks = [
+  { to: '/blog', label: 'Blogs', color: 'primary', height: '50', variant: 'text', rounded: 'lg' },
+  { to: '/events', label: 'Events', color: 'primary', height: '50', variant: 'text', rounded: 'lg' },
+  { to: '/contact', label: 'Contact Us', color: 'primary', height: '50', variant: 'text', rounded: 'lg' }
+];
+
+const drawerItems = [
+  { icon: 'mdi-forum', title: 'Blogs', value: 'blogs', to: '/blog' },
+  { icon: 'mdi-calendar-clock', title: 'Events', value: 'events', to: '/events' },
+  { icon: 'mdi-frequently-asked-questions', title: 'FAQ', value: 'faq', to: '/faq' },
+  { icon: 'mdi-information', title: 'Policies', value: 'policies', to: '/policies' },
+  { icon: 'mdi-domain', title: 'Workshops', value: 'workshops', to: '/workshops' },
+  { icon: 'mdi-account-multiple', title: 'Teams', value: 'teams', to: '/teams' },
+  { icon: 'mdi-hvac', title: 'Terms', value: 'terms', to: '/terms' },
+];
+
+const router = useRouter();
+
+onMounted(() => {
+  const darkModeSetting = localStorage.getItem('dark_mode');
+  isDarkMode.value = darkModeSetting === 'true';
+  theme.global.name.value = isDarkMode.value ? 'dark' : 'light';
+});
+
+const toggleTheme = () => {
+  isDarkMode.value = !isDarkMode.value;
+  localStorage.setItem('dark_mode', isDarkMode.value);
+  theme.global.name.value = isDarkMode.value ? 'dark' : 'light';
+};
+
+const handleAuth = () => {
+  if (isAuth.value) {
+    Cookies.remove('token');
+    window.location.reload();
+  } else {
+    router.push('/login');
+  }
 };
 </script>
 

@@ -36,12 +36,62 @@ const router = createRouter({
         },
         {
           path:"events",
-          component:defineAsyncComponent(()=>import("@/views/User/EventView.vue"))
+          component:defineAsyncComponent(()=>import("@/views/User/EventView.vue")),
+          children:[
+            {
+              path:'',
+              component:defineAsyncComponent(()=>import('@/views/User/Child/Event/EventsPage.vue'))
+            },
+            {
+              path:':id',
+              component:defineAsyncComponent(()=>import('@/views/User/Child/Event/EventPage.vue'))
+            }
+          ]
+        },
+        {
+           path:'teams',
+           component:defineAsyncComponent(()=>import('@/views/User/TeamView.vue')),
+           children:[
+            {
+              path:'',
+              component:defineAsyncComponent(()=>import('@/views/User/Child/Team/TeamsPage.vue'))
+            },
+            {
+              path:':id',
+              component:defineAsyncComponent(()=>import('@/views/User/Child/Team/TeamPage.vue'))
+            }
+           ]
         },
         {
          path:"contact",
          component:defineAsyncComponent(()=>import('@/views/User/ContactView.vue'))
         },
+        {
+          path:'faq',
+          component:defineAsyncComponent(()=>import('@/views/User/FAQView.vue'))
+        },
+        {
+          path:"workshops",
+          component:defineAsyncComponent(()=>import('@/views/User/WorkshopView.vue')),
+          children:[
+            {
+              path:'',
+              component:defineAsyncComponent(()=>import('@/views/User/Child/Workshop/WorkshopsPage.vue'))
+            },
+            {
+              path:':id',
+              component:defineAsyncComponent(()=>import('@/views/User/Child/Workshop/WorkshopPage.vue'))
+            }
+          ]
+        },
+        {
+          path:'policies',
+          component:defineAsyncComponent(()=>import('@/views/User/PoliciesView.vue'))
+        },
+        {
+          path:'terms',
+          component:defineAsyncComponent(()=>import('@/views/User/TermsView.vue'))
+        }
       ]
     },
     {

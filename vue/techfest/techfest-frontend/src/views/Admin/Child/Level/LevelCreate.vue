@@ -29,106 +29,102 @@
   </v-form>
 </template>
 
-<script>
-import { api } from '@/api'
-import axios from 'axios'
-import Cookies from 'js-cookie'
+<script setup>
+import { ref, onMounted } from 'vue';
+import axios from 'axios';
+import Cookies from 'js-cookie';
+import { useRouter, useRoute } from 'vue-router';
+import { api } from '@/api';
 
-export default {
-  data() {
-    return {
-      id: this.$route.params.id,
-      levelData: {
-        title: '',
-        priority: null,
-        status: ''
-      },
-      config: {
-        headers: {
-          Authorization: `Bearer ${Cookies.get('token')}`
-        }
-      }
-    }
-  },
-  methods: {
-    async getLevelDataById() {
-      try {
-        const response = await axios.get(`${api()}/v1/sponsor-level/${this.id}`)
-        if (response.status === 200) {
-          this.levelData = { ...response.data }
-        }
-      } catch (error) {
-        this.$toast.error(error.response?.data?.error || 'Failed to fetch data', {
-          position: 'top-right'
-        })
-      }
-    },
-    async submitForm() {
-      if (this.id) {
-        await this.patchLevelData()
-      } else {
-        await this.postLevelData()
-      }
-    },
-    async postLevelData() {
-      try {
-        const response = await axios.post(
-          `${api()}/v1/sponsor-level/create`,
-          this.levelData,
-          this.config
-        )
-        if (response.status === 200) {
-          this.$router.push('/admin/level')
-          this.resetForm()
-        } else {
-          this.$toast.error('Something Went Wrong!', {
-            position: 'top-right'
-          })
-        }
-      } catch (error) {
-        this.$toast.error(error.response?.data?.error || 'Failed to submit data', {
-          position: 'top-right'
-        })
-      }
-    },
-    async patchLevelData() {
-      try {
-        const response = await axios.patch(
-          `${api()}/v1/sponsor-level/${this.id}`,
-          this.levelData,
-          this.config
-        )
-        if (response.status === 200) {
-          this.$router.push('/admin/level')
-          this.resetForm()
-        } else {
-          this.$toast.error('Something Went Wrong!', {
-            position: 'top-right'
-          })
-        }
-      } catch (error) {
-        this.$toast.error(error.response?.data?.error || 'Failed to update data', {
-          position: 'top-right'
-        })
-      }
-    },
-    setStatus(status) {
-      this.levelData.status = status
-    },
-    resetForm() {
-      this.levelData = {
-        title: '',
-        priority: null,
-        status: ''
-      }
-    }
-  },
-  mounted() {
-    if (this.id) {
-      this.getLevelDataById()
-    }
+const router = useRouter();
+const route = useRoute();
+
+const id = route.params.id;
+const levelData = ref({
+  title: '',
+  priority: null,
+  status: ''
+});
+
+const config = {
+  headers: {
+    Authorization: `Bearer ${Cookies.get('token')}`
   }
-}
+};
+
+const getLevelDataById = async () => {
+  try {
+    const response = await axios.get(`${api()}/v1/sponsor-level/${id}`);
+    if (response.status === 200) {
+      levelData.value = { ...response.data };
+    }
+  } catch (error) {
+    // Handle error
+    console.error(error.response?.data?.error || 'Failed to fetch data');
+  }
+};
+
+const submitForm = async () => {
+  if (id) {
+    await patchLevelData();
+  } else {
+    await postLevelData();
+  }
+};
+
+const postLevelData = async () => {
+  try {
+    const response = await axios.post(
+      `${api()}/v1/sponsor-level/create`,
+      levelData.value,
+      config
+    );
+    if (response.status === 200) {
+      router.push('/admin/level');
+      resetForm();
+    } else {
+      console.error('Something Went Wrong!');
+    }
+  } catch (error) {
+    console.error(error.response?.data?.error || 'Failed to submit data');
+  }
+};
+
+const patchLevelData = async () => {
+  try {
+    const response = await axios.patch(
+      `${api()}/v1/sponsor-level/${id}`,
+      levelData.value,
+      config
+    );
+    if (response.status === 200) {
+      router.push('/admin/level');
+      resetForm();
+    } else {
+      console.error('Something Went Wrong!');
+    }
+  } catch (error) {
+    console.error(error.response?.data?.error || 'Failed to update data');
+  }
+};
+
+const setStatus = (status) => {
+  levelData.value.status = status;
+};
+
+const resetForm = () => {
+  levelData.value = {
+    title: '',
+    priority: null,
+    status: ''
+  };
+};
+
+onMounted(() => {
+  if (id) {
+    getLevelDataById();
+  }
+});
 </script>
 
 <style scoped>

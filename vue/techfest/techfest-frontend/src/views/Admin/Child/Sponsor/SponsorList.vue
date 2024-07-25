@@ -4,9 +4,9 @@
       <v-progress-circular indeterminate color="primary" size="64" width="6"></v-progress-circular>
     </v-container>
   </template>
-  <template v-else-if="sponsorData.length === 0">
+  <!-- <template v-else-if="sponsorData.length === 0">
     <v-title class="text-h1 text-center">There are no Sponsors</v-title>
-  </template>
+  </template> -->
   <template v-else>
     <v-row>
       <v-col col="12" class="text-center">

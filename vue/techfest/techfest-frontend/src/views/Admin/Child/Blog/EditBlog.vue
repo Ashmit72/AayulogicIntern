@@ -1,3 +1,171 @@
+<script setup>
+import { ref, onMounted } from 'vue'
+import { QuillEditor } from '@vueup/vue-quill'
+import { api } from '@/api'
+import axios from 'axios'
+import '@vueup/vue-quill/dist/vue-quill.snow.css'
+import '@vueup/vue-quill/dist/vue-quill.bubble.css'
+import Cookies from 'js-cookie'
+import { useRoute, useRouter } from 'vue-router'
+import { useToast } from 'vue-toast-notification' 
+
+const blogData = ref({
+  title: '',
+  slug: '',
+  excerpt: '',
+  content: '',
+  image: null,
+  createBlogForm: null,
+  valid: false
+})
+
+const config = {
+  headers: {
+    Authorization: `Bearer ${Cookies.get('token')}`
+  }
+}
+
+const rules = {
+  title: [
+    v => !!v || 'Title is required',
+    v => (v && v.length >= 10) || 'Title must be More than 10 characters'
+  ],
+  excerpt: [
+    v => !!v || 'Excerpt is required',
+    v => (v && v.length >= 10) || 'Excerpt must be more than 10 characters'
+  ]
+}
+
+const toast = useToast()
+const route = useRoute()
+const router = useRouter()
+
+const getSlugData = async () => {
+  try {
+    const response = await axios.get(`${api()}/v1/blog?per_page=10&page=1`)
+    if (response.data.blogs) {
+      const blogSlug = response.data.blogs.find((blog) => blog.id === route.params.id)
+      if (blogSlug) {
+        blogData.value.slug = blogSlug.slug
+        getSingleSlug()
+      } else {
+        toast.error('Blog Not Found', {
+          position: 'top-right'
+        })
+      }
+    }
+  } catch (error) {
+    toast.error(error.message, {
+      position: 'top-right'
+    })
+  }
+}
+
+const getSingleSlug = async () => {
+  try {
+    const response = await axios.get(`${api()}/v1/blog/${blogData.value.slug}`)
+    if (response.status === 200) {
+      blogData.value.title = response.data.title
+      blogData.value.slug = response.data.slug
+      blogData.value.status = response.data.status
+      blogData.value.content = response.data.content
+      blogData.value.excerpt = response.data.excerpt
+      blogData.value.image = response.data.featuredImage
+    }
+  } catch (error) {
+    toast.error(error.message, {
+      position: 'top-right'
+    })
+  }
+}
+
+const submitForm = async () => {
+  const { valid } = await blogData.value.createBlogForm.validate()
+
+  const form = new FormData()
+  for (const key in blogData.value) {
+    form.append(key, blogData.value[key])
+  }
+
+  if (valid) {
+    try {
+      const response = await axios.patch(
+        `${api()}/v1/blog/${route.params.id}`,
+        form,
+        config
+      )
+      if (response.data.success) {
+        console.log('Working')
+        blogData.value.title = ''
+        blogData.value.content = ''
+        blogData.value.excerpt = ''
+        blogData.value.image = null
+        router.push('/admin/blog')
+      } else {
+        toast.error('Something Went Wrong', {
+          position: 'top-right'
+        })
+      }
+    } catch (error) {
+      toast.error(error.message, {
+        position: 'top-right'
+      })
+    }
+  }
+}
+
+const handleDraftClick = async (event) => {
+  event.preventDefault()
+  try {
+    blogData.value.status = 'Draft'
+    const response = await axios.patch(
+      `${api()}/v1/blog/${route.params.id}`,
+      blogData.value,
+      config
+    )
+    response.data.success
+      ? toast.success('Blog Updated', {
+          position: 'top-right'
+        })
+      : toast.error('Something Went Wrong', {
+          position: 'top-right'
+        })
+  } catch (error) {
+    toast.error(error.message, {
+      position: 'top-right'
+    })
+  }
+}
+
+const handlePublishClick = async (event) => {
+  event.preventDefault()
+  try {
+    blogData.value.status = 'Published'
+    const response = await axios.patch(
+      `${api()}/v1/blog/${route.params.id}`,
+      blogData.value,
+      config
+    )
+    response.data.success
+      ? toast.success('Blog Updated', {
+          position: 'top-right'
+        })
+      : toast.error('Something Went Wrong', {
+          position: 'top-right'
+        })
+  } catch (error) {
+    toast.error(error.message, {
+      position: 'top-right'
+    })
+  }
+}
+
+onMounted(() => {
+  getSlugData()
+})
+</script>
+
+
 <template>
   <v-form v-model="valid" ref="createBlogForm" @submit.prevent="submitForm">
     <v-text-field
@@ -25,167 +193,6 @@
     </div>
   </v-form>
 </template>
-<script>
-import { QuillEditor } from '@vueup/vue-quill'
-import { api } from '@/api'
-import axios from 'axios'
-import '@vueup/vue-quill/dist/vue-quill.snow.css'
-import '@vueup/vue-quill/dist/vue-quill.bubble.css'
-import Cookies from 'js-cookie'
-
-export default {
-    components: {
-    QuillEditor
-  },
-  
-  data() {
-    return {
-      getSlug: '',
-      blogData: {
-        title: '',
-        slug: '',
-        excerpt: '',
-        content: '',
-        image: null,
-        createBlogForm: null,
-        valid: false
-      },
-      config:{
-        headers:{
-          'Authorization':`Bearer ${Cookies.get('token')}`
-        }
-      },
-      rules:{
-        title: [
-        v => !!v || 'Title is required',
-        v => (v && v.length >= 10) || 'Title must be more than 10 characters',
-      ],
-        excerpt: [
-        v => !!v || 'Excerpt is required',
-        v => (v && v.length >= 10) || 'Excerpt must be more than 10 characters',
-      ]
-      }
-    }
-  },
-  methods: {
-    async getSlugData() {
-      try {
-        const response = await axios.get(`${api()}/v1/blog?per_page=10&page=1`)
-        if (response.data.blogs) {
-          const blogSlug = response.data.blogs.find((blog) => blog.id === this.$route.params.id)
-          if (blogSlug) {
-            this.getSlug = blogSlug.slug
-            this.getSingleSlug()
-          } else {
-            this.$toast.error('Blog Not Found', {
-              position: 'top-right'
-            })
-          }
-        }
-      } catch (error) {
-        this.$toast.success(error.message, {
-              position: 'top-right'
-            })
-      }
-    },
-    async getSingleSlug() {
-      try {
-        const response = await axios.get(`${api()}/v1/blog/${this.getSlug}`)
-        if (response.status === 200) {
-          this.blogData.title=response.data.title
-          this.blogData.slug=response.data.slug;
-          this.blogData.status=response.data.status;
-          this.blogData.content=response.data.content;
-          this.blogData.excerpt=response.data.excerpt;
-          this.blogData.image=response.data.featuredImage;
-
-        }
-      } catch (error) {
-        this.$toast.success(error.message, {
-              position: 'top-right'
-            })
-      }
-    },
-    async submitForm(){
-      const { valid } = await this.$refs.createBlogForm.validate()
-
-      const form = new FormData()
-      for (const key in this.blogData) {
-          form.append(key, this.blogData[key]);
-        }
-
-
-      if(valid){
-        try {
-          const response=await axios.patch(`${api()}/v1/blog/${this.$route.params.id}`,form,this.config)
-          if (response.data.success) {
-            console.log('Working');
-            this.blogData.title=''
-            this.blogData.content='',
-            this.blogData.excerpt=''
-            this.blogData.image=null
-            this.$router.push('/admin/blog')
-          }else{
-            this.$toast.error('Something Went Wrong', {
-              position: 'top-right'
-            })
-          }
-
-        } catch (error) {
-            this.$toast.error(error.message, {
-              position: 'top-right'
-            })
-        }
-      }
-    },
-    async handleDraftClick(event){
-        event.preventDefault();
-        try {
-          this.blogData.status="Draft"
-          console.log(this.blogData);
-          const response=await axios.patch(`${api()}/v1/blog/${this.$route.params.id}`,this.blogData,this.config)
-          response.data.success?
-             this.$toast.success('Blog Updated', {
-              position: 'top-right'
-            })
-          :this.$toast.error('Something Went Wrong', {
-              position: 'top-right'
-            });
-          
-
-        } catch (error) {
-             this.$toast.error(error.message, {
-              position: 'top-right'
-            })
-        }
-    },
-    async handlePublishClick(event){
-        event.preventDefault();
-        try {
-          this.blogData.status="Published"
-          console.log(this.blogData);
-          const response=await axios.patch(`${api()}/v1/blog/${this.$route.params.id}`,this.blogData,this.config)
-          response.data.success?
-             this.$toast.success('Blog Updated', {
-              position: 'top-right'
-            })
-          :this.$toast.error('Something Went Wrong', {
-              position: 'top-right'
-            });
-          
-
-        } catch (error) {
-             this.$toast.error(error.message, {
-              position: 'top-right'
-            })
-        }
-    }
-  },
-  mounted() {
-    this.getSlugData()
-  }
-}
-</script>
 
 <style lang="scss">
 .container-content {
