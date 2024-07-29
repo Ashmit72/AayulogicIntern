@@ -27,8 +27,6 @@ const getFaqDataById = async () => {
       faqData.value = { ...response.data }
     }
   } catch (error) {
-    // Handle the error here
-    // For example, using a toast or alert
     console.error(error.response?.data?.error || 'Failed to fetch data')
   }
 }

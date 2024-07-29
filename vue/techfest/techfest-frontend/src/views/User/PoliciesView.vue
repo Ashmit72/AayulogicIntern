@@ -43,6 +43,6 @@ const getTerms=async()=> {
 </template>
 <style scoped>
 .conditions {
-  transform: translateY(100px);
+  transform: translateY(50px);
 }
 </style>

@@ -1,33 +1,13 @@
 <script setup >
-import { api } from '@/api';
-import axios from 'axios';
-import { onMounted, ref } from 'vue';
-import { useRoute } from 'vue-router';
-import { useToast } from 'vue-toast-notification';
-const route=useRoute()
-const toast=useToast()
-const eventData= ref({})
-onMounted(()=>{
-  geteventData()
-})
+import { onMounted } from 'vue';
+import { useEventBlogStore } from '../../../../../store/user/event';
 
-const geteventData=async()=> {
-      try {
-        const response = await axios.get(`${api()}/v1/frontend/event/${route.params.id}`);
-        if (response.status === 200) {
-          eventData.value = response.data;
-        } else {
-          toast.error('Something went wrong', {
-            position: 'top-right',
-          });
-        }
-      } catch (error) {
-        console.error('Error fetching blog data:', error);
-        toast.error(error.message, {
-          position: 'top-right',
-        });
-      }
-    }
+
+const event=useEventBlogStore()
+
+onMounted(()=>{
+  event.geteventData()
+})
 
 </script>
 
@@ -38,13 +18,13 @@ const geteventData=async()=> {
           <v-img
             aspect-ratio="16/9"
             cover
-            :src="eventData.eventImage?.url || 'https://cdn.vuetifyjs.com/images/parallax/material.jpg'"
+            :src="event.eventData.eventImage?.url || 'https://cdn.vuetifyjs.com/images/parallax/material.jpg'"
           ></v-img>
           <v-card class="mt-4">
-            <v-card-title>{{ eventData.title }}</v-card-title>
-            <v-card-subtitle>Link: {{ eventData.link}}</v-card-subtitle>
+            <v-card-title>{{ event.eventData.title }}</v-card-title>
+            <v-card-subtitle>Link: {{ event.eventData.link}}</v-card-subtitle>
             <v-card-text>
-              <div v-html="eventData.description"></div>
+              <div v-html="event.eventData.description"></div>
             </v-card-text>
           </v-card>
         </v-col>

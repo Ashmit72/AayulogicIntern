@@ -1,31 +1,19 @@
 <script setup>
-import { api } from '@/api'
-import axios from 'axios'
-import { onMounted, ref } from 'vue'
-import { useToast } from 'vue-toast-notification'
+import { onMounted } from 'vue'
+import { useWorkshopUserStore } from '../../../../../store/user/workshop';
 
-const workshopData = ref([])
-const toast = useToast()
+
+const workshop=useWorkshopUserStore()
+
 onMounted(() => {
-  getWorkshopdata()
+  workshop.getworkshops()
 })
 
-const getWorkshopdata = async () => {
-  try {
-    const response = await axios.get(`${api()}/v1/frontend/workshop?per_page=10&page=1`)
-    if (response.status === 200) {
-      workshopData.value = response.data.workshops
-    }
-  } catch (error) {
-    toast.error(error.message, {
-      position: 'top-right'
-    })
-  }
-}
+
 </script>
 <template>
   <v-row>
-    <v-col xl="6" v-for="workshop in workshopData">
+    <v-col xl="6" v-for="workshop in workshop.workshops">
       <v-card class="mx-auto" max-width="900">
         <v-img height="200px" :src="workshop.workshopImage?.url" cover></v-img>
         <v-card-title>{{ workshop.title }}</v-card-title>

@@ -1,94 +1,20 @@
 <script setup>
-import { api } from '@/api';
-import axios from 'axios';
-import Cookies from 'js-cookie';
-import { onMounted, ref } from 'vue';
-import { useToast } from 'vue-toast-notification';
+import { onMounted} from 'vue';
 import { RouterLink } from 'vue-router';
 import CustomDataTable from '@/components/Admin/CustomDataTable.vue';
+import { useAdminLevelStore } from '../../../../../store/admin/level';
 
-const loading = ref(false);
-const toast = useToast();
-const pagination = ref({});
-const levelData = ref([]);
-const headers = [
-  {
-    align: 'start',
-    key: 'title',
-    sortable: false,
-    title: 'Title'
-  },
-  {
-    align: 'start',
-    key: 'priority',
-    sortable: false,
-    title: 'Priority'
-  },
-  {
-    align: 'start',
-    key: 'status',
-    sortable: false,
-    title: 'Status'
-  },
-  {
-    key: 'edit',
-    title: 'Edit'
-  },
-  {
-    key: 'delete',
-    title: 'Delete'
-  }
-];
-const config = {
-  headers: {
-    Authorization: `Bearer ${Cookies.get('token')}`
-  }
-};
 
-const getLevelData = async () => {
-  try {
-    loading.value = true;
-    const response = await axios.get(`${api()}/v1/sponsor-level/?per_page=10&page=1`);
-    if (response.data.levels) {
-      levelData.value = response.data.levels;
-      pagination.value = response.data.pagination;
-    } else {
-      console.log('Something Went Wrong');
-    }
-  } catch (error) {
-    console.log(error.message);
-  } finally {
-    loading.value = false;
-  }
-};
+const level=useAdminLevelStore()
 
-const handleDeleteLevelClick = async (id) => {
-  try {
-    const response = await axios.delete(`${api()}/v1/sponsor-level/${id}`, config);
-    if (response.status === 200) {
-      toast.success('Level Deleted', {
-        position: 'top-right'
-      });
-      await getLevelData(); // Call the function directly
-    } else {
-      toast.error('Level Failed to Delete!', {
-        position: 'top-right'
-      });
-    }
-  } catch (error) {
-    toast.error(error.message, {
-      position: 'top-right'
-    });
-  }
-};
 
 onMounted(() => {
-  getLevelData();
+  level.getLevelData();
 });
 </script>
 
 <template>
-    <template v-if="loading">
+    <template v-if="level.loading">
       <v-container fluid fill-height class="d-flex justify-center align-center">
         <v-progress-circular indeterminate color="primary" size="64" width="6"></v-progress-circular>
       </v-container>
@@ -109,10 +35,10 @@ onMounted(() => {
         <v-col>
           <v-card>
             <custom-data-table
-              :items="levelData"
-              :headers="headers"
-              :pagination="pagination"
-              @delete-item="handleDeleteLevelClick"
+              :items="level.levelData"
+              :headers="level.headers"
+              :pagination="level.pagination"
+              @delete-item="level.handleDeleteLevelClick"
             ></custom-data-table>
           </v-card>
         </v-col>

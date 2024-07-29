@@ -1,6 +1,6 @@
 <template>
     <h1>
-       This is team page. 
+       This is team page 
     </h1>
 </template>
 <script></script>

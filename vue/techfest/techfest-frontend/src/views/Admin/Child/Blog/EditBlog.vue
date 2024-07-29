@@ -19,6 +19,8 @@ const blogData = ref({
   valid: false
 })
 
+const createBlogForm=ref(null);
+
 const config = {
   headers: {
     Authorization: `Bearer ${Cookies.get('token')}`
@@ -80,7 +82,7 @@ const getSingleSlug = async () => {
 }
 
 const submitForm = async () => {
-  const { valid } = await blogData.value.createBlogForm.validate()
+  const { valid } = await createBlogForm.value.validate()
 
   const form = new FormData()
   for (const key in blogData.value) {

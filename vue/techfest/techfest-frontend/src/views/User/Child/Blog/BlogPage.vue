@@ -1,34 +1,14 @@
 <script setup >
-import { api } from '@/api';
-import axios from 'axios';
-import { onMounted, ref } from 'vue';
-import { useRoute } from 'vue-router';
-import { useToast } from 'vue-toast-notification';
+import { onMounted } from 'vue';
+import { useUserBlogStore } from '../../../../../store/user/blog';
 
-const toast=useToast()
-const route=useRoute()
-const blogData=ref({})
+
+const blog=useUserBlogStore()
 
 onMounted(()=>{
-  getBlogData()
+  blog.getBlogData()
 })
 
-const getBlogData=async()=> {
-      try {
-        const response = await axios.get(`${api()}/v1/frontend/blog/${route.params.slug}`)
-        if (response.status === 200) {
-          blogData.value = response.data
-        } else {
-          toast.error('Something went wrong', {
-            position: 'top-right'
-          })
-        }
-      } catch (error) {
-        toast.error(error.message, {
-          position: 'top-right'
-        })
-      }
-    }
 
 </script>
 
@@ -40,14 +20,14 @@ const getBlogData=async()=> {
           aspect-ratio="16/9"
           cover
           :src="
-            blogData.featuredImage?.url || 'https://cdn.vuetifyjs.com/images/parallax/material.jpg'
+            blog.blogData.featuredImage?.url || 'https://cdn.vuetifyjs.com/images/parallax/material.jpg'
           "
         ></v-img>
         <v-card class="mt-4">
-          <v-card-title>{{ blogData.title }}</v-card-title>
-          <v-card-subtitle>Created At {{ blogData.createdAt }}</v-card-subtitle>
+          <v-card-title>{{ blog.blogData.title }}</v-card-title>
+          <v-card-subtitle>Created At {{ blog.blogData.createdAt }}</v-card-subtitle>
           <v-card-text>
-            <div v-html="blogData.content"></div>
+            <div v-html="blog.blogData.content"></div>
           </v-card-text>
         </v-card>
       </v-col>
