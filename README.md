@@ -1,1 +1,1 @@
-My Internship Projects I made at Real HR Soft 
+My Internship Projects I made at Real HR Soft. During this time i have had a solid foundation on HTML,CSS,JavaScript and Vue Js. I worked upon so much fun projects like Hangman Game, Tictac To, A beautifull CSS Template with an Overlay effect and Video based Background and a lot more. 
